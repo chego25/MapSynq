@@ -3,13 +3,18 @@ package sg.qi.steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebDriver;
+import sg.qi.utilities.DriverManager;
+
 import static org.testng.Assert.*;
 
 public class test {
 
     @Given("^today is Sunday$")
     public void today_is_Sunday() {
+        WebDriver driver = DriverManager.createDriver();
         assertEquals("Given", "Given");
+        driver.quit();
     }
 
     @When("^I ask whether it's Friday yet$")
