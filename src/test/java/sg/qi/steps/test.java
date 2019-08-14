@@ -3,26 +3,27 @@ package sg.qi.steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
+import sg.qi.pages.LoginPage;
 import sg.qi.pages.MapPage;
-import sg.qi.utilities.ContextManager;
-import sg.qi.utilities.DriverManager;
+import sg.qi.utilities.PageManager;
 
 import static org.testng.Assert.*;
 
 public class test {
 
-    private ContextManager contextManager;
+    private PageManager pageManager;
 
-    public test(ContextManager contextManager) {
-        this.contextManager = contextManager;
+    public test(PageManager pageManager) {
+        this.pageManager = pageManager;
     }
 
     @Given("^today is Sunday$")
     public void today_is_Sunday() {
-        MapPage mapPage = contextManager.getMapPage();
+        MapPage mapPage = pageManager.getMapPage();
+        mapPage.clickOnLoginPageLink();
+        LoginPage loginPage = pageManager.getLoginPage();
         assertEquals("Given", "Given");
-        contextManager.closeDriver();
+        pageManager.closeDriver();
     }
 
     @When("^I ask whether it's Friday yet$")

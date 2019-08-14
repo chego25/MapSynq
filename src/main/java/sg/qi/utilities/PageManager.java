@@ -3,9 +3,9 @@ package sg.qi.utilities;
 import org.openqa.selenium.WebDriver;
 import sg.qi.pages.*;
 
-public class ContextManager {
+public class PageManager {
 
-    public ContextManager() {
+    public PageManager() {
         this.driver = DriverManager.createDriver();
     }
 
