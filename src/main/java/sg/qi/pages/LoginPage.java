@@ -4,12 +4,28 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.LoadableComponent;
+import sg.qi.utilities.DriverFactory;
 
-public class LoginPage extends BasePage {
+public class LoginPage extends LoadableComponent<LoginPage> {
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(this.driver, this);
+    public LoginPage() {
+        WebDriver driver = DriverFactory.getDriver();
+        PageFactory.initElements(driver, this);
+    }
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+
+    }
+
+    public String getTitle() {
+        return DriverFactory.getDriver().getTitle();
     }
 
     @FindBy(xpath = "//div[@class='block_header']/a")

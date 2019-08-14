@@ -16,11 +16,10 @@ import java.util.Arrays;
 
 public class DriverManager {
 
-    private WebDriver driver;
-
-    public WebDriver getDriver() throws UnsupportedCommandException {
-        if (driver == null) {
+    public DriverManager() throws UnsupportedCommandException {
+        if (DriverFactory.getDriver() == null) {
             String browser = System.getProperty("browser");
+            WebDriver driver = null;
             try {
                 switch (browser) {
                     case "chrome": {
@@ -45,15 +44,12 @@ public class DriverManager {
                     }
                 }
                 driver.manage().window().maximize();
-                return driver;
+                DriverFactory.addDriver(driver);
             }
             catch (NullPointerException e) {
                 String error = "Environment Variable \'browser\' contains an invalid value: " + browser;
                 throw new UnsupportedCommandException(error);
             }
-        }
-        else {
-            return driver;
         }
     }
 

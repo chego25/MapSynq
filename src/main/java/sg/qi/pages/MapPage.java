@@ -4,12 +4,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.LoadableComponent;
+import sg.qi.utilities.DriverFactory;
 
-public class MapPage extends BasePage {
+public class MapPage extends LoadableComponent<MapPage> {
 
-    public MapPage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(this.driver, this);
+    public MapPage() {
+        WebDriver driver = DriverFactory.getDriver();
+        driver.navigate().to("http://www.mapsynq.com");
+        PageFactory.initElements(driver, this);
+    }
+
+    @Override
+    protected void load() {
+
+    }
+
+    @Override
+    protected void isLoaded() throws Error {
+
+    }
+
+    public String getTitle() {
+        return DriverFactory.getDriver().getTitle();
     }
 
     @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[4]/a")

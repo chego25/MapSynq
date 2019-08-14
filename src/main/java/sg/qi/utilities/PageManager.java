@@ -1,15 +1,9 @@
 package sg.qi.utilities;
 
-import org.openqa.selenium.WebDriver;
 import sg.qi.pages.*;
 
 public class PageManager {
 
-    public PageManager(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    private WebDriver driver;
     private AboutPage aboutPage;
     private AppPage appPage;
     private FAQPage faqPage;
@@ -17,52 +11,53 @@ public class PageManager {
     private GalactioPage galactioPage;
     private LoginPage loginPage;
     private MapPage mapPage;
+    private PasswordPage passwordPage;
     private RegisterPage registerPage;
     private StorePage storePage;
     private TnCPage tncPage;
 
     public AboutPage getAboutPage() {
-        return (aboutPage == null) ? aboutPage = new AboutPage(driver) : aboutPage;
+        return (aboutPage == null) ? aboutPage = new AboutPage().get() : aboutPage;
     }
 
     public AppPage getAppPage() {
-        return (appPage == null) ? appPage = new AppPage(driver) : appPage;
+        return (appPage == null) ? appPage = new AppPage().get() : appPage;
     }
 
     public FAQPage getFaqPage() {
-        return (faqPage == null) ? faqPage = new FAQPage(driver) : faqPage;
+        return (faqPage == null) ? faqPage = new FAQPage().get() : faqPage;
     }
 
     public FeedbackPage getFeedbackPage() {
-        return (feedbackPage == null) ? feedbackPage = new FeedbackPage(driver) : feedbackPage;
+        return (feedbackPage == null) ? feedbackPage = new FeedbackPage().get() : feedbackPage;
     }
 
     public GalactioPage getGalactioPage() {
-        return (galactioPage == null) ? galactioPage = new GalactioPage(driver) : galactioPage;
+        return (galactioPage == null) ? galactioPage = new GalactioPage().get() : galactioPage;
     }
 
     public LoginPage getLoginPage() {
-        return (loginPage == null) ? loginPage = new LoginPage(driver) : loginPage;
+        return (loginPage == null) ? loginPage = new LoginPage().get() : loginPage;
     }
 
     public MapPage getMapPage() {
-        return (mapPage == null) ? mapPage = new MapPage(driver) : mapPage;
+        return (mapPage == null) ? mapPage = new MapPage().get() : mapPage;
+    }
+
+    public PasswordPage getPasswordPage() {
+        return (passwordPage == null) ? passwordPage = new PasswordPage().get() : passwordPage;
     }
 
     public RegisterPage getRegisterPage() {
-        return (registerPage == null) ? registerPage = new RegisterPage(driver) : registerPage;
+        return (registerPage == null) ? registerPage = new RegisterPage().get() : registerPage;
     }
 
     public StorePage getStorePage() {
-        return (storePage == null) ? storePage = new StorePage(driver) : storePage;
+        return (storePage == null) ? storePage = new StorePage().get() : storePage;
     }
 
     public TnCPage getTncPage() {
-        return (tncPage == null) ? tncPage = new TnCPage(driver) : tncPage;
-    }
-
-    public void closeDriver() {
-        driver.close();
+        return (tncPage == null) ? tncPage = new TnCPage().get() : tncPage;
     }
 
 }

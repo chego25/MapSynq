@@ -5,6 +5,6 @@ Feature: Navigation between Pages
 
   Scenario: Map Page Navigation
 
-    Given today is Sunday
-    When I ask whether it's Friday yet
-    Then I should be told Yes
+    Given a user is in the Map Page of MapSynq application
+    When he clicks on the Login Page link in the Map Page
+    Then he should be displayed the Login Page of MapSync
