@@ -6,10 +6,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.safari.SafariDriver;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -20,31 +21,27 @@ public class DriverManager {
         String browser = System.getProperty("browser");
         switch (browser) {
             case "chrome": {
-                driver = createChromeDriver();
+                driver = getChromeDriver();
                 break;
             }
             case "edge": {
-                driver = createEdgeDriver();
+                driver = getEdgeDriver();
                 break;
             }
             case "firefox": {
-                driver = createFirefoxDriver();
+                driver = getFirefoxDriver();
                 break;
             }
             case "ie": {
-                driver = createIEDriver();
-                break;
-            }
-            case "opera": {
-                driver = createOperaDriver();
+                driver = getInternetExplorerDriver();
                 break;
             }
             case "safari": {
-                driver = createSafariDriver();
+                driver = getSafariDriver();
                 break;
             }
             default: {
-                String error = "Environment Variable \'browser\' contains an unsupported value: " + browser;
+                String error = "Environment Variable \'browser\' contains an invalid value: " + browser;
                 throw new UnsupportedCommandException(error);
             }
         }
@@ -52,39 +49,47 @@ public class DriverManager {
         return driver;
     }
 
-    private static ChromeDriver createChromeDriver() {
-        String driverPath = getDriverExcutablePath() + "chromedriver";
+    private static ChromeDriver getChromeDriver() throws UnsupportedCommandException {
+        String driverPath = getExecutablePath() + "chromedriver-" + getSystemArchitecture();
         if (getOperatingSystem().equals("windows")) {
             driverPath = driverPath + ".exe";
         }
-        System.out.println(driverPath);
         System.setProperty("webdriver.chrome.driver", driverPath);
         return new ChromeDriver(new ChromeOptions());
     }
 
-    private static EdgeDriver createEdgeDriver() {
+    private static EdgeDriver getEdgeDriver() throws UnsupportedCommandException {
         String error = "Microsoft Edge Browser is not supported";
         throw new UnsupportedCommandException(error);
     }
 
-    private static FirefoxDriver createFirefoxDriver() {
-        String error = "Mozilla Firefox Browser is not supported";
-        throw new UnsupportedCommandException(error);
+    private static FirefoxDriver getFirefoxDriver() throws UnsupportedCommandException {
+        String driverPath = getExecutablePath() + "geckodriver-" + getSystemArchitecture();
+        if (getOperatingSystem().equals("windows")) {
+            driverPath = driverPath + ".exe";
+        }
+        System.setProperty("webdriver.gecko.driver", driverPath);
+        return new FirefoxDriver(new FirefoxOptions());
     }
 
-    private static InternetExplorerDriver createIEDriver() {
+    private static InternetExplorerDriver getInternetExplorerDriver() throws UnsupportedCommandException {
         String error = "Internet Explorer Browser is not supported";
         throw new UnsupportedCommandException(error);
     }
 
-    private static OperaDriver createOperaDriver() {
-        String error = "Opera Browser is not supported";
+    private static SafariDriver getSafariDriver() throws UnsupportedCommandException {
+        String error = "Apple Safari Browser is not supported";
         throw new UnsupportedCommandException(error);
     }
 
-    private static SafariDriver createSafariDriver() {
-        String error = "Apple Safari Browser is not supported";
-        throw new UnsupportedCommandException(error);
+    private static String getExecutablePath() throws UnsupportedCommandException {
+        String separator = System.getProperty("file.separator");
+        String suiteHome = System.getProperty("user.dir");
+        ArrayList<String> pathParts = new ArrayList<String>(Arrays.asList(suiteHome.split(separator)));
+        pathParts.add("drivers");
+        pathParts.add(getOperatingSystem());
+        pathParts.add("");
+        return String.join(separator, pathParts.toArray(new String[0]));
     }
 
     private static String getOperatingSystem() throws UnsupportedCommandException {
@@ -103,14 +108,17 @@ public class DriverManager {
         }
     }
 
-    private static String getDriverExcutablePath() throws UnsupportedCommandException {
-        String separator = System.getProperty("file.separator");
-        String suiteHome = System.getProperty("user.dir");
-        ArrayList<String> pathParts = new ArrayList<String>(Arrays.asList(suiteHome.split(separator)));
-        pathParts.add("drivers");
-        pathParts.add(getOperatingSystem());
-        pathParts.add("");
-        return String.join(separator, pathParts.toArray(new String[0]));
+    private static String getSystemArchitecture() throws UnsupportedCommandException {
+        String osArch = System.getProperty("os.arch");
+        if (osArch.contains("64")) {
+            return "64";
+        }
+        else if (osArch.contains("86")) {
+            return "32";
+        }
+        else {
+            throw new UnsupportedCommandException("System Architecture \'" + osArch + "\' is not supported");
+        }
     }
 
 }
