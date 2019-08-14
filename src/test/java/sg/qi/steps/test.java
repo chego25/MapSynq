@@ -4,17 +4,25 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+import sg.qi.pages.MapPage;
+import sg.qi.utilities.ContextManager;
 import sg.qi.utilities.DriverManager;
 
 import static org.testng.Assert.*;
 
 public class test {
 
+    private ContextManager contextManager;
+
+    public test(ContextManager contextManager) {
+        this.contextManager = contextManager;
+    }
+
     @Given("^today is Sunday$")
     public void today_is_Sunday() {
-        WebDriver driver = DriverManager.createDriver();
+        MapPage mapPage = contextManager.getMapPage();
         assertEquals("Given", "Given");
-        driver.quit();
+        contextManager.closeDriver();
     }
 
     @When("^I ask whether it's Friday yet$")
