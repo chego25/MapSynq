@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 
-public class MapPage extends LoadableComponent<MapPage> {
+public class StorePage extends LoadableComponent<StorePage> {
 
-    public MapPage(WebDriver driver) {
+    public StorePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
     }

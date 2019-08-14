@@ -17,36 +17,38 @@ import java.util.Arrays;
 public class DriverManager {
 
     public static WebDriver createDriver() throws UnsupportedCommandException {
-        WebDriver driver;
         String browser = System.getProperty("browser");
-        switch (browser) {
-            case "chrome": {
-                driver = getChromeDriver();
-                break;
+        WebDriver driver = null;
+        try {
+            switch (browser) {
+                case "chrome": {
+                    driver = getChromeDriver();
+                    break;
+                }
+                case "firefox": {
+                    driver = getFirefoxDriver();
+                    break;
+                }
+                case "ie": {
+                    driver = getInternetExplorerDriver();
+                    break;
+                }
+                case "edge": {
+                    driver = getEdgeDriver();
+                    break;
+                }
+                case "safari": {
+                    driver = getSafariDriver();
+                    break;
+                }
             }
-            case "edge": {
-                driver = getEdgeDriver();
-                break;
-            }
-            case "firefox": {
-                driver = getFirefoxDriver();
-                break;
-            }
-            case "ie": {
-                driver = getInternetExplorerDriver();
-                break;
-            }
-            case "safari": {
-                driver = getSafariDriver();
-                break;
-            }
-            default: {
-                String error = "Environment Variable \'browser\' contains an invalid value: " + browser;
-                throw new UnsupportedCommandException(error);
-            }
+            driver.manage().window().maximize();
+            return driver;
         }
-        driver.manage().window().maximize();
-        return driver;
+        catch (NullPointerException e) {
+            String error = "Environment Variable \'browser\' contains an invalid value: " + browser;
+            throw new UnsupportedCommandException(error);
+        }
     }
 
     private static ChromeDriver getChromeDriver() throws UnsupportedCommandException {
@@ -56,11 +58,6 @@ public class DriverManager {
         }
         System.setProperty("webdriver.chrome.driver", driverPath);
         return new ChromeDriver(new ChromeOptions());
-    }
-
-    private static EdgeDriver getEdgeDriver() throws UnsupportedCommandException {
-        String error = "Microsoft Edge Browser is not supported";
-        throw new UnsupportedCommandException(error);
     }
 
     private static FirefoxDriver getFirefoxDriver() throws UnsupportedCommandException {
@@ -74,6 +71,11 @@ public class DriverManager {
 
     private static InternetExplorerDriver getInternetExplorerDriver() throws UnsupportedCommandException {
         String error = "Internet Explorer Browser is not supported";
+        throw new UnsupportedCommandException(error);
+    }
+
+    private static EdgeDriver getEdgeDriver() throws UnsupportedCommandException {
+        String error = "Microsoft Edge Browser is not supported";
         throw new UnsupportedCommandException(error);
     }
 
