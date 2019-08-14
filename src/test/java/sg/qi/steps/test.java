@@ -6,8 +6,7 @@ import io.cucumber.java.en.When;
 import sg.qi.pages.LoginPage;
 import sg.qi.pages.MapPage;
 import sg.qi.utilities.PageManager;
-
-import static org.testng.Assert.*;
+import static org.junit.Assert.*;
 
 public class test {
 
@@ -22,6 +21,10 @@ public class test {
         MapPage mapPage = pageManager.getMapPage();
         mapPage.clickOnLoginPageLink();
         LoginPage loginPage = pageManager.getLoginPage();
+        loginPage.clickOnBackwardLink();
+        mapPage = pageManager.getMapPage();
+        mapPage.clickOnLoginPageLink();
+        //mapPage.clickOnRegisterPageLink();
         assertEquals("Given", "Given");
         pageManager.closeDriver();
     }
@@ -33,7 +36,7 @@ public class test {
 
     @Then("^I should be told Yes$")
     public void i_should_be_told_yes() {
-        System.out.println("Test - " + Thread.currentThread().getId() + " - " + Thread.currentThread().getName());
         assertEquals("Then", "Then");
     }
+
 }

@@ -15,31 +15,31 @@ public class MapPage {
         PageFactory.initElements(this.driver, this);
     }
 
-    @FindBy(linkText = "Sign in")
+    @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[4]/a")
     private WebElement loginPageLink;
 
-    @FindBy(linkText = "Register ")
+    @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[4]/a[2]")
     private WebElement registerPageLink;
 
-    @FindBy(linkText = "Mobile App")
+    @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[2]/a")
     private WebElement appPageLink;
 
-    @FindBy(linkText = "Galactio")
+    @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[2]/a[2]")
     private WebElement galactioPageLink;
 
-    @FindBy(linkText = "SG GPS Navigation")
+    @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[3]/a")
     private WebElement storePageLink;
 
-    @FindBy(linkText = "Feedback")
+    @FindBy(xpath = "//div[@class='footer']/a")
     private WebElement feedbackPageLink;
 
-    @FindBy(linkText = "About")
+    @FindBy(xpath = "//div[@class='footer']/a[2]")
     private WebElement aboutPageLink;
 
-    @FindBy(linkText = "FAQ")
+    @FindBy(xpath = "//div[@class='footer']/a[3]")
     private WebElement faqPageLink;
 
-    @FindBy(linkText = "Terms and conditions")
+    @FindBy(xpath = "//div[@class='footer']/a[4]")
     private WebElement tncPageLink;
 
     public void clickOnLoginPageLink() {
