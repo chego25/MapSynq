@@ -1,14 +1,12 @@
 package sg.qi.pages;
 
-        import org.openqa.selenium.WebDriver;
-        import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
-public class AboutPage {
-
-    private WebDriver driver;
+public class AboutPage extends BasePage {
 
     public AboutPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(this.driver, this);
     }
 

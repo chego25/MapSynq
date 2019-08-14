@@ -3,12 +3,10 @@ package sg.qi.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class PasswordPage {
-
-    private WebDriver driver;
+public class PasswordPage extends BasePage {
 
     public PasswordPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(this.driver, this);
     }
 

@@ -5,13 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MapPage {
-
-    private WebDriver driver;
+public class MapPage extends BasePage {
 
     public MapPage(WebDriver driver) {
-        this.driver = driver;
-        this.driver.navigate().to("http://www.mapsynq.com/");
+        super(driver);
         PageFactory.initElements(this.driver, this);
     }
 

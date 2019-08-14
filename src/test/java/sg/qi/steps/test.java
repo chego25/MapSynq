@@ -3,6 +3,7 @@ package sg.qi.steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import sg.qi.TestContext;
 import sg.qi.pages.LoginPage;
 import sg.qi.pages.MapPage;
 import sg.qi.utilities.PageManager;
@@ -10,23 +11,23 @@ import static org.junit.Assert.*;
 
 public class test {
 
-    private PageManager pageManager;
+    private TestContext testContext;
 
-    public test(PageManager pageManager) {
-        this.pageManager = pageManager;
+    public test(TestContext testContext) {
+        this.testContext = testContext;
     }
 
     @Given("^today is Sunday$")
     public void today_is_Sunday() {
-        MapPage mapPage = pageManager.getMapPage();
+        MapPage mapPage = testContext.getPageManager().getMapPage();
         mapPage.clickOnLoginPageLink();
-        LoginPage loginPage = pageManager.getLoginPage();
+        LoginPage loginPage = testContext.getPageManager().getLoginPage();
         loginPage.clickOnBackwardLink();
-        mapPage = pageManager.getMapPage();
+        mapPage = testContext.getPageManager().getMapPage();
         mapPage.clickOnLoginPageLink();
         //mapPage.clickOnRegisterPageLink();
         assertEquals("Given", "Given");
-        pageManager.closeDriver();
+        testContext.getDriverManager().getDriver().close();
     }
 
     @When("^I ask whether it's Friday yet$")

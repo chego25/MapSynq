@@ -5,8 +5,8 @@ import sg.qi.pages.*;
 
 public class PageManager {
 
-    public PageManager() {
-        this.driver = DriverManager.createDriver();
+    public PageManager(WebDriver driver) {
+        this.driver = driver;
     }
 
     private WebDriver driver;

@@ -3,12 +3,10 @@ package sg.qi.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class TnCPage {
-
-    private WebDriver driver;
+public class TnCPage extends BasePage {
 
     public TnCPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
         PageFactory.initElements(this.driver, this);
     }
 
