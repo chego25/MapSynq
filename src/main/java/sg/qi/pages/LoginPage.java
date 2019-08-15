@@ -6,11 +6,21 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import sg.qi.utilities.DriverFactory;
+import java.util.ArrayList;
 
 public class LoginPage extends LoadableComponent<LoginPage> {
 
+    private WebDriver driver;
+
     public LoginPage() {
-        WebDriver driver = DriverFactory.getDriver();
+        driver = DriverFactory.getDriver();
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        if (tabs.size() > 1) {
+            driver.switchTo().window(tabs.get(1));
+            driver.close();
+            tabs.remove(1);
+        }
+        driver.switchTo().window(tabs.get(0));
         PageFactory.initElements(driver, this);
     }
 
@@ -25,7 +35,7 @@ public class LoginPage extends LoadableComponent<LoginPage> {
     }
 
     public String getTitle() {
-        return DriverFactory.getDriver().getTitle();
+        return driver.getTitle();
     }
 
     @FindBy(xpath = "//div[@class='block_header']/a")

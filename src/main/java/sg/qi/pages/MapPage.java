@@ -6,11 +6,20 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import sg.qi.utilities.DriverFactory;
+import java.util.ArrayList;
 
 public class MapPage extends LoadableComponent<MapPage> {
 
+    private WebDriver driver;
+
     public MapPage() {
-        WebDriver driver = DriverFactory.getDriver();
+        driver = DriverFactory.getDriver();
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        if (tabs.size() > 1) {
+            driver.switchTo().window(tabs.get(1));
+            driver.close();
+        }
+        driver.switchTo().window(tabs.get(0));
         driver.navigate().to("http://www.mapsynq.com");
         PageFactory.initElements(driver, this);
     }
@@ -26,7 +35,7 @@ public class MapPage extends LoadableComponent<MapPage> {
     }
 
     public String getTitle() {
-        return DriverFactory.getDriver().getTitle();
+        return driver.getTitle();
     }
 
     @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[4]/a")
@@ -41,7 +50,7 @@ public class MapPage extends LoadableComponent<MapPage> {
     @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[2]/a[2]")
     private WebElement galactioPageLink;
 
-    @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[3]/a")
+    @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[2]/a[3]")
     private WebElement storePageLink;
 
     @FindBy(xpath = "//div[@class='footer']/a")

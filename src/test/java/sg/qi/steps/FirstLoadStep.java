@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import sg.qi.pages.MapPage;
 import sg.qi.utilities.DriverManager;
 import sg.qi.utilities.PageManager;
-
 import static org.junit.Assert.assertEquals;
 
 public class FirstLoadStep {

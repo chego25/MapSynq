@@ -4,11 +4,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import sg.qi.utilities.DriverFactory;
+import java.util.ArrayList;
 
 public class AppPage extends LoadableComponent<AppPage> {
 
+    private WebDriver driver;
+
     public AppPage() {
-        WebDriver driver = DriverFactory.getDriver();
+        driver = DriverFactory.getDriver();
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        System.out.println(tabs.toString());
+        if (tabs.size() > 1) {
+            driver.switchTo().window(tabs.get(0));
+            driver.close();
+            tabs.remove(0);
+        }
+        driver.switchTo().window(tabs.get(0));
         PageFactory.initElements(driver, this);
     }
 
@@ -23,7 +34,7 @@ public class AppPage extends LoadableComponent<AppPage> {
     }
 
     public String getTitle() {
-        return DriverFactory.getDriver().getTitle();
+        return driver.getTitle();
     }
 
 }
