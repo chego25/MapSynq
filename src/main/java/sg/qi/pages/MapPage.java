@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import sg.qi.utilities.DriverFactory;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class MapPage extends LoadableComponent<MapPage> {
 
@@ -20,7 +21,8 @@ public class MapPage extends LoadableComponent<MapPage> {
             driver.close();
         }
         driver.switchTo().window(tabs.get(0));
-        driver.navigate().to("http://www.mapsynq.com");
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("constants");
+        driver.navigate().to(resourceBundle.getString("APP_URL"));
         PageFactory.initElements(driver, this);
     }
 
