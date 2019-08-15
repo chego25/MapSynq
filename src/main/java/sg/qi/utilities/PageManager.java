@@ -4,60 +4,48 @@ import sg.qi.pages.*;
 
 public class PageManager {
 
-    private AboutPage aboutPage;
-    private AppPage appPage;
-    private FAQPage faqPage;
-    private FeedbackPage feedbackPage;
-    private GalactioPage galactioPage;
-    private LoginPage loginPage;
-    private MapPage mapPage;
-    private PasswordPage passwordPage;
-    private RegisterPage registerPage;
-    private StorePage storePage;
-    private TnCPage tncPage;
-
     public AboutPage getAboutPage() {
-        return (aboutPage == null) ? aboutPage = new AboutPage().get() : aboutPage;
+        return new AboutPage().get();
     }
 
     public AppPage getAppPage() {
-        return (appPage == null) ? appPage = new AppPage().get() : appPage;
+        return new AppPage().get();
     }
 
     public FAQPage getFaqPage() {
-        return (faqPage == null) ? faqPage = new FAQPage().get() : faqPage;
+        return new FAQPage().get();
     }
 
     public FeedbackPage getFeedbackPage() {
-        return (feedbackPage == null) ? feedbackPage = new FeedbackPage().get() : feedbackPage;
+        return new FeedbackPage().get();
     }
 
     public GalactioPage getGalactioPage() {
-        return (galactioPage == null) ? galactioPage = new GalactioPage().get() : galactioPage;
+        return new GalactioPage().get();
     }
 
     public LoginPage getLoginPage() {
-        return (loginPage == null) ? loginPage = new LoginPage().get() : loginPage;
+        return new LoginPage().get();
     }
 
     public MapPage getMapPage() {
-        return (mapPage == null) ? mapPage = new MapPage().get() : mapPage;
+        return new MapPage().get();
     }
 
     public PasswordPage getPasswordPage() {
-        return (passwordPage == null) ? passwordPage = new PasswordPage().get() : passwordPage;
+        return new PasswordPage().get();
     }
 
     public RegisterPage getRegisterPage() {
-        return (registerPage == null) ? registerPage = new RegisterPage().get() : registerPage;
+        return new RegisterPage().get();
     }
 
     public StorePage getStorePage() {
-        return (storePage == null) ? storePage = new StorePage().get() : storePage;
+        return new StorePage().get();
     }
 
     public TnCPage getTncPage() {
-        return (tncPage == null) ? tncPage = new TnCPage().get() : tncPage;
+        return new TnCPage().get();
     }
 
 }

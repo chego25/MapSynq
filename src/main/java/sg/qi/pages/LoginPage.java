@@ -15,12 +15,11 @@ public class LoginPage extends LoadableComponent<LoginPage> {
     public LoginPage() {
         driver = DriverFactory.getDriver();
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        if (tabs.size() > 1) {
-            driver.switchTo().window(tabs.get(1));
+        for (int i = 0; i < (tabs.size() - 1); i++) {
+            driver.switchTo().window(tabs.get(i));
             driver.close();
-            tabs.remove(1);
         }
-        driver.switchTo().window(tabs.get(0));
+        driver.switchTo().window(tabs.get(tabs.size() - 1));
         PageFactory.initElements(driver, this);
     }
 

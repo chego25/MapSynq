@@ -12,27 +12,17 @@ import static org.junit.Assert.assertEquals;
 
 public class NavigationStep {
 
-    private MapPage mapPage;
-    private LoginPage loginPage;
-    private RegisterPage registerPage;
-    private AppPage appPage;
-    private GalactioPage galactioPage;
-    private StorePage storePage;
+    private PageManager pageManager;
 
     public NavigationStep(DriverManager driverManager, PageManager pageManager) {
-        mapPage = pageManager.getMapPage();
-        loginPage = pageManager.getLoginPage();
-        registerPage = pageManager.getRegisterPage();
-        appPage = pageManager.getAppPage();
-        galactioPage = pageManager.getGalactioPage();
-        storePage = pageManager.getStorePage();
+        this.pageManager = pageManager;
     }
 
     @Given("^a user is in the (.*) Page of MapSynq application$")
     public void a_user_is_in_the_param_page_of_mapsynq_application(String pageName) {
         switch (pageName) {
             case "Map": {
-                assertEquals("mapSYNQ - Live Traffic Information Platform", mapPage.getTitle());
+                assertEquals("mapSYNQ - Live Traffic Information Platform", pageManager.getMapPage().getTitle());
                 break;
             }
             default: {
@@ -47,23 +37,23 @@ public class NavigationStep {
             case "Map": {
                 switch (linkName) {
                     case "Login": {
-                        mapPage.clickOnLoginPageLink();
+                        pageManager.getMapPage().clickOnLoginPageLink();
                         break;
                     }
                     case "Register": {
-                        mapPage.clickOnRegisterPageLink();
+                        pageManager.getMapPage().clickOnRegisterPageLink();
                         break;
                     }
                     case "App": {
-                        mapPage.clickOnAppPageLink();
+                        pageManager.getMapPage().clickOnAppPageLink();
                         break;
                     }
                     case "Galactio": {
-                        mapPage.clickOnGalactioPageLink();
+                        pageManager.getMapPage().clickOnGalactioPageLink();
                         break;
                     }
                     case "Store": {
-                        mapPage.clickOnStorePageLink();
+                        pageManager.getMapPage().clickOnStorePageLink();
                         break;
                     }
                     default: {
@@ -82,27 +72,27 @@ public class NavigationStep {
     public void he_should_be_displayed_the_param_page_of_mapsynq(String pageName) {
         switch (pageName) {
             case "Map": {
-                assertEquals("mapSYNQ - Live Traffic Information Platform", mapPage.getTitle());
+                assertEquals("mapSYNQ - Live Traffic Information Platform", pageManager.getMapPage().getTitle());
                 break;
             }
             case "Login": {
-                assertEquals("mapSYNQ user profile", loginPage.getTitle());
+                assertEquals("mapSYNQ user profile", pageManager.getLoginPage().getTitle());
                 break;
             }
             case "Register": {
-                assertEquals("mapSYNQ user profile", registerPage.getTitle());
+                assertEquals("mapSYNQ user profile", pageManager.getRegisterPage().getTitle());
                 break;
             }
             case "App": {
-                assertEquals("mapSYNQ Mobile", appPage.getTitle());
+                assertEquals("mapSYNQ Mobile", pageManager.getAppPage().getTitle());
                 break;
             }
             case "Galactio": {
-                assertEquals("Galactio", galactioPage.getTitle());
+                assertEquals("Galactio", pageManager.getGalactioPage().getTitle());
                 break;
             }
             case "Store": {
-                assertEquals("Galactio - Navigation & Maps for Urban Mobility - Apps on Google Play", storePage.getTitle());
+                assertEquals("Galactio - Navigation & Maps for Urban Mobility - Apps on Google Play", pageManager.getStorePage().getTitle());
                 break;
             }
             default: {

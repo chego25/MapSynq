@@ -16,8 +16,8 @@ public class MapPage extends LoadableComponent<MapPage> {
     public MapPage() {
         driver = DriverFactory.getDriver();
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        if (tabs.size() > 1) {
-            driver.switchTo().window(tabs.get(1));
+        for (int i = 1; i < tabs.size(); i++) {
+            driver.switchTo().window(tabs.get(i));
             driver.close();
         }
         driver.switchTo().window(tabs.get(0));

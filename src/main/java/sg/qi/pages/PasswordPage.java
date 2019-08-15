@@ -4,11 +4,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import sg.qi.utilities.DriverFactory;
+import java.util.ArrayList;
 
 public class PasswordPage extends LoadableComponent<PasswordPage> {
 
+    private WebDriver driver;
+
     public PasswordPage() {
-        WebDriver driver = DriverFactory.getDriver();
+        driver = DriverFactory.getDriver();
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        for (int i = 0; i < (tabs.size() - 1); i++) {
+            driver.switchTo().window(tabs.get(i));
+            driver.close();
+        }
+        driver.switchTo().window(tabs.get(tabs.size() - 1));
         PageFactory.initElements(driver, this);
     }
 
@@ -23,7 +32,7 @@ public class PasswordPage extends LoadableComponent<PasswordPage> {
     }
 
     public String getTitle() {
-        return DriverFactory.getDriver().getTitle();
+        return driver.getTitle();
     }
 
 }

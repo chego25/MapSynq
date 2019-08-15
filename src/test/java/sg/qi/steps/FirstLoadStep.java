@@ -9,10 +9,10 @@ import static org.junit.Assert.assertEquals;
 
 public class FirstLoadStep {
 
-    private MapPage mapPage;
+    private PageManager pageManager;
 
     public FirstLoadStep(DriverManager driverManager, PageManager pageManager) {
-        mapPage = pageManager.getMapPage();
+        this.pageManager = pageManager;
     }
 
     @Given("^a user tries to open MapSynq application$")
@@ -20,7 +20,7 @@ public class FirstLoadStep {
 
     @Then("^the Map Page should be loaded by default$")
     public void the_map_page_should_be_loaded_by_default() {
-        assertEquals("mapSYNQ - Live Traffic Information Platform", mapPage.getTitle());
+        assertEquals("mapSYNQ - Live Traffic Information Platform", pageManager.getMapPage().getTitle());
     }
 
 }
