@@ -24,11 +24,19 @@ public class MapModalStep {
         try {
             switch (modalName) {
                 case "Feedback": {
-                    pageManager.getMapPage().clickOnFeedbackModalLink();
+                    pageManager.getMapPage().clickOnFeedbackDialogLink();
                     break;
                 }
                 case "FAQ": {
-                    pageManager.getMapPage().clickOnFAQModalLink();
+                    pageManager.getMapPage().clickOnFAQDialogLink();
+                    break;
+                }
+                case "Legend": {
+                    pageManager.getMapPage().clickOnLegendDialogLink();
+                    break;
+                }
+                case "Calendar": {
+                    pageManager.getMapPage().clickOnCalendarDialogLink();
                     break;
                 }
                 default: {
@@ -46,11 +54,19 @@ public class MapModalStep {
         try {
             switch (modalName) {
                 case "Feedback": {
-                    assertTrue(pageManager.getMapPage().isFeedbackModalVisible());
+                    assertTrue(pageManager.getMapPage().isFeedbackDialogVisible());
                     break;
                 }
                 case "FAQ": {
-                    assertTrue(pageManager.getMapPage().isFAQModalVisible());
+                    assertTrue(pageManager.getMapPage().isFAQDialogVisible());
+                    break;
+                }
+                case "Legend": {
+                    assertTrue(pageManager.getMapPage().isLegendDialogVisible());
+                    break;
+                }
+                case "Calendar": {
+                    assertTrue(pageManager.getMapPage().isCalendarDialogVisible());
                     break;
                 }
                 default: {

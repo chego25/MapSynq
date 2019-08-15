@@ -13,3 +13,5 @@ Feature: Map Page Modals
       | modal    |
       | Feedback |
       | FAQ      |
+      | Legend   |
+      | Calendar |
