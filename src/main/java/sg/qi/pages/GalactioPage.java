@@ -1,6 +1,5 @@
 package sg.qi.pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import sg.qi.utilities.DriverFactory;
@@ -8,17 +7,8 @@ import java.util.ArrayList;
 
 public class GalactioPage extends LoadableComponent<GalactioPage> {
 
-    private WebDriver driver;
-
     public GalactioPage() {
-        driver = DriverFactory.getDriver();
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        for (int i = 0; i < (tabs.size() - 1); i++) {
-            driver.switchTo().window(tabs.get(i));
-            driver.close();
-        }
-        driver.switchTo().window(tabs.get(tabs.size() - 1));
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(DriverFactory.getDriver(), this);
     }
 
     @Override
@@ -31,8 +21,19 @@ public class GalactioPage extends LoadableComponent<GalactioPage> {
 
     }
 
+    private void switchDriver() {
+        ArrayList<String> tabs = new ArrayList<>(DriverFactory.getDriver().getWindowHandles());
+        for (int i = 0; i < (tabs.size() - 1); i++) {
+            DriverFactory.getDriver().switchTo().window(tabs.get(i));
+            DriverFactory.getDriver().close();
+        }
+        DriverFactory.getDriver().switchTo().window(tabs.get(tabs.size() - 1));
+        PageFactory.initElements(DriverFactory.getDriver(), this);
+    }
+
     public String getTitle() {
-        return driver.getTitle();
+        this.switchDriver();
+        return DriverFactory.getDriver().getTitle();
     }
 
 }

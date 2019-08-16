@@ -8,17 +8,8 @@ import java.util.ArrayList;
 
 public class TnCPage extends LoadableComponent<TnCPage> {
 
-    private WebDriver driver;
-
     public TnCPage() {
-        driver = DriverFactory.getDriver();
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        for (int i = 0; i < (tabs.size() - 1); i++) {
-            driver.switchTo().window(tabs.get(i));
-            driver.close();
-        }
-        driver.switchTo().window(tabs.get(tabs.size() - 1));
-        PageFactory.initElements(driver, this);
+        PageFactory.initElements(DriverFactory.getDriver(), this);
     }
 
     @Override
@@ -31,8 +22,19 @@ public class TnCPage extends LoadableComponent<TnCPage> {
 
     }
 
+    private void switchDriver() {
+        ArrayList<String> tabs = new ArrayList<>(DriverFactory.getDriver().getWindowHandles());
+        for (int i = 0; i < (tabs.size() - 1); i++) {
+            DriverFactory.getDriver().switchTo().window(tabs.get(i));
+            DriverFactory.getDriver().close();
+        }
+        DriverFactory.getDriver().switchTo().window(tabs.get(tabs.size() - 1));
+        PageFactory.initElements(DriverFactory.getDriver(), this);
+    }
+
     public String getTitle() {
-        return driver.getTitle();
+        this.switchDriver();
+        return DriverFactory.getDriver().getTitle();
     }
 
 }

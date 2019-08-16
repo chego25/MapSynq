@@ -6,16 +6,33 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.UnsupportedCommandException;
+import sg.qi.pages.*;
 import sg.qi.utilities.DriverManager;
 import sg.qi.utilities.PageManager;
 import static org.junit.Assert.assertEquals;
 
 public class NavigationStep {
 
-    private PageManager pageManager;
+    private MapPage mapPage;
+    private LoginPage loginPage;
+    private RegisterPage registerPage;
+    private AppPage appPage;
+    private GalactioPage galactioPage;
+    private StorePage storePage;
+    private AboutPage aboutPage;
+    private TnCPage tncPage;
+    private PasswordPage passwordPage;
 
     public NavigationStep(DriverManager driverManager, PageManager pageManager) {
-        this.pageManager = pageManager;
+        mapPage = pageManager.getMapPage();
+        loginPage = pageManager.getLoginPage();
+        registerPage = pageManager.getRegisterPage();
+        appPage = pageManager.getAppPage();
+        galactioPage = pageManager.getGalactioPage();
+        storePage = pageManager.getStorePage();
+        aboutPage = pageManager.getAboutPage();
+        tncPage = pageManager.getTnCPage();
+        passwordPage = pageManager.getPasswordPage();
     }
 
     @Given("^a user is in the (.*) Page of MapSynq application$")
@@ -26,15 +43,15 @@ public class NavigationStep {
                     break;
                 }
                 case "Login": {
-                    pageManager.getMapPage().clickOnLoginPageLink();
+                    mapPage.clickOnLoginPageLink();
                     break;
                 }
                 case "Register": {
-                    pageManager.getMapPage().clickOnRegisterPageLink();
+                    mapPage.clickOnRegisterPageLink();
                     break;
                 }
                 case "App": {
-                    pageManager.getMapPage().clickOnAppPageLink();
+                    mapPage.clickOnAppPageLink();
                     break;
                 }
                 default: {
@@ -54,31 +71,31 @@ public class NavigationStep {
                 case "Map": {
                     switch (linkName) {
                         case "Login": {
-                            pageManager.getMapPage().clickOnLoginPageLink();
+                            mapPage.clickOnLoginPageLink();
                             break;
                         }
                         case "Register": {
-                            pageManager.getMapPage().clickOnRegisterPageLink();
+                            mapPage.clickOnRegisterPageLink();
                             break;
                         }
                         case "App": {
-                            pageManager.getMapPage().clickOnAppPageLink();
+                            mapPage.clickOnAppPageLink();
                             break;
                         }
                         case "Galactio": {
-                            pageManager.getMapPage().clickOnGalactioPageLink();
+                            mapPage.clickOnGalactioPageLink();
                             break;
                         }
                         case "Store": {
-                            pageManager.getMapPage().clickOnStorePageLink();
+                            mapPage.clickOnStorePageLink();
                             break;
                         }
                         case "About": {
-                            pageManager.getMapPage().clickOnAboutPageLink();
+                            mapPage.clickOnAboutPageLink();
                             break;
                         }
                         case "TnC": {
-                            pageManager.getMapPage().clickOnTnCPageLink();
+                            mapPage.clickOnTnCPageLink();
                             break;
                         }
                         default: {
@@ -90,27 +107,27 @@ public class NavigationStep {
                 case "Login": {
                     switch (linkName) {
                         case "Map": {
-                            pageManager.getLoginPage().clickOnMapPageLink();
+                            loginPage.clickOnMapPageLink();
                             break;
                         }
                         case "App1": {
-                            pageManager.getLoginPage().clickOnAppPageMenuLink();
+                            loginPage.clickOnAppPageMenuLink();
                             break;
                         }
                         case "Store": {
-                            pageManager.getLoginPage().clickOnStorePageLink();
+                            loginPage.clickOnStorePageLink();
                             break;
                         }
                         case "Register": {
-                            pageManager.getLoginPage().clickOnRegisterPageLink();
+                            loginPage.clickOnRegisterPageLink();
                             break;
                         }
                         case "App2": {
-                            pageManager.getLoginPage().clickOnAppPageSecondLink();
+                            loginPage.clickOnAppPageSecondLink();
                             break;
                         }
                         case "Password": {
-                            pageManager.getLoginPage().clickOnPasswordPageLink();
+                            loginPage.clickOnPasswordPageLink();
                             break;
                         }
                         default: {
@@ -122,15 +139,15 @@ public class NavigationStep {
                 case "Register": {
                     switch (linkName) {
                         case "Map": {
-                            pageManager.getRegisterPage().clickOnMapPageLink();
+                            registerPage.clickOnMapPageLink();
                             break;
                         }
                         case "App": {
-                            pageManager.getRegisterPage().clickOnAppPageLink();
+                            registerPage.clickOnAppPageLink();
                             break;
                         }
                         case "Store": {
-                            pageManager.getRegisterPage().clickOnStorePageLink();
+                            registerPage.clickOnStorePageLink();
                             break;
                         }
                         default: {
@@ -142,11 +159,11 @@ public class NavigationStep {
                 case "App": {
                     switch (linkName) {
                         case "Map": {
-                            pageManager.getAppPage().clickOnMapPageLink();
+                            appPage.clickOnMapPageLink();
                             break;
                         }
                         case "Store": {
-                            pageManager.getAppPage().clickOnStorePageLink();
+                            appPage.clickOnStorePageLink();
                             break;
                         }
                         default: {
@@ -168,31 +185,31 @@ public class NavigationStep {
     @Then("^the (.*) Page should have the title \"(.*)\"$")
     public void the_param_page_should_have_the_title_param(String pageName, String pageTitle) {
         if (pageName.equals("Map")) {
-            assertEquals(pageTitle, pageManager.getMapPage().getTitle());
+            assertEquals(pageTitle, mapPage.getTitle());
         }
         else if (pageName.equals("Login")) {
-            assertEquals(pageTitle, pageManager.getLoginPage().getTitle());
+            assertEquals(pageTitle, loginPage.getTitle());
         }
         else if (pageName.equals("Register")) {
-            assertEquals(pageTitle, pageManager.getRegisterPage().getTitle());
+            assertEquals(pageTitle, registerPage.getTitle());
         }
         else if (pageName.equals("App") || pageName.equals("App1") || pageName.equals("App2")) {
-            assertEquals(pageTitle, pageManager.getAppPage().getTitle());
+            assertEquals(pageTitle, appPage.getTitle());
         }
         else if (pageName.equals("Galactio")) {
-            assertEquals(pageTitle, pageManager.getGalactioPage().getTitle());
+            assertEquals(pageTitle, galactioPage.getTitle());
         }
         else if (pageName.equals("Store")) {
-            assertEquals(pageTitle, pageManager.getStorePage().getTitle());
+            assertEquals(pageTitle, storePage.getTitle());
         }
         else if (pageName.equals("About")) {
-            assertEquals(pageTitle, pageManager.getAboutPage().getTitle());
+            assertEquals(pageTitle, aboutPage.getTitle());
         }
         else if (pageName.equals("TnC")) {
-            assertEquals(pageTitle, pageManager.getTnCPage().getTitle());
+            assertEquals(pageTitle, tncPage.getTitle());
         }
         else if (pageName.equals("Password")) {
-            assertEquals(pageTitle, pageManager.getPasswordPage().getTitle());
+            assertEquals(pageTitle, passwordPage.getTitle());
         }
         else {
             throw new UnsupportedCommandException("Page \'" + pageName + "\' is not inside the scope");

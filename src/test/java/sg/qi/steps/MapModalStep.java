@@ -5,6 +5,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.UnsupportedCommandException;
+import sg.qi.pages.MapPage;
 import sg.qi.utilities.DriverManager;
 import sg.qi.utilities.PageManager;
 
@@ -13,10 +14,10 @@ import static org.junit.Assert.assertTrue;
 
 public class MapModalStep {
 
-    private PageManager pageManager;
+    private MapPage mapPage;
 
     public MapModalStep(DriverManager driverManager, PageManager pageManager) {
-        this.pageManager = pageManager;
+        mapPage = pageManager.getMapPage();
     }
 
     @When("^he clicks on the (.*) Modal link in the Map Page$")
@@ -24,19 +25,19 @@ public class MapModalStep {
         try {
             switch (modalName) {
                 case "Feedback": {
-                    pageManager.getMapPage().clickOnFeedbackDialogLink();
+                    mapPage.clickOnFeedbackDialogLink();
                     break;
                 }
                 case "FAQ": {
-                    pageManager.getMapPage().clickOnFAQDialogLink();
+                    mapPage.clickOnFAQDialogLink();
                     break;
                 }
                 case "Legend": {
-                    pageManager.getMapPage().clickOnLegendDialogLink();
+                    mapPage.clickOnLegendDialogLink();
                     break;
                 }
                 case "Calendar": {
-                    pageManager.getMapPage().clickOnCalendarDialogLink();
+                    mapPage.clickOnCalendarDialogLink();
                     break;
                 }
                 default: {
@@ -54,19 +55,19 @@ public class MapModalStep {
         try {
             switch (modalName) {
                 case "Feedback": {
-                    assertTrue(pageManager.getMapPage().isFeedbackDialogVisible());
+                    assertTrue(mapPage.isFeedbackDialogVisible());
                     break;
                 }
                 case "FAQ": {
-                    assertTrue(pageManager.getMapPage().isFAQDialogVisible());
+                    assertTrue(mapPage.isFAQDialogVisible());
                     break;
                 }
                 case "Legend": {
-                    assertTrue(pageManager.getMapPage().isLegendDialogVisible());
+                    assertTrue(mapPage.isLegendDialogVisible());
                     break;
                 }
                 case "Calendar": {
-                    assertTrue(pageManager.getMapPage().isCalendarDialogVisible());
+                    assertTrue(mapPage.isCalendarDialogVisible());
                     break;
                 }
                 default: {

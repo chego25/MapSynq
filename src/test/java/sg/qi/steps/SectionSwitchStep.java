@@ -3,8 +3,10 @@ package sg.qi.steps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.UnsupportedCommandException;
+import sg.qi.pages.MapPage;
 import sg.qi.utilities.DriverManager;
 import sg.qi.utilities.PageManager;
 
@@ -13,15 +15,20 @@ import static org.junit.Assert.assertTrue;
 
 public class SectionSwitchStep {
 
-    private PageManager pageManager;
+    private MapPage mapPage;
 
     public SectionSwitchStep(DriverManager driverManager, PageManager pageManager) {
-        this.pageManager = pageManager;
+        mapPage = pageManager.getMapPage();
     }
 
     @Then("^the Live Section should be active by default$")
     public void the_live_section_should_be_active_by_default() {
-        assertTrue(pageManager.getMapPage().isLiveSectionActive());
+        try {
+            assertTrue(mapPage.isLiveSectionActive());
+        }
+        catch (NoSuchElementException e) {
+            Assert.fail(e.getMessage());
+        }
     }
 
     @When("^he clicks on the (.*) Section button$")
@@ -29,15 +36,15 @@ public class SectionSwitchStep {
         try {
             switch (sectionName) {
                 case "Directions": {
-                    pageManager.getMapPage().clickOnDirectionsSectionButton();
+                    mapPage.clickOnDirectionsSectionButton();
                     break;
                 }
                 case "Personal": {
-                    pageManager.getMapPage().clickOnPersonalSectionButton();
+                    mapPage.clickOnPersonalSectionButton();
                     break;
                 }
                 case "Live": {
-                    pageManager.getMapPage().clickOnLiveSectionButton();
+                    mapPage.clickOnLiveSectionButton();
                     break;
                 }
                 default: {
@@ -45,7 +52,7 @@ public class SectionSwitchStep {
                 }
             }
         }
-        catch (NoSuchElementException e) {
+        catch (NoSuchElementException | JavascriptException e) {
             Assert.fail(e.getMessage());
         }
     }
@@ -55,15 +62,15 @@ public class SectionSwitchStep {
         try {
             switch (sectionName) {
                 case "Directions": {
-                    assertTrue(pageManager.getMapPage().isDirectionsSectionActive());
+                    assertTrue(mapPage.isDirectionsSectionActive());
                     break;
                 }
                 case "Personal": {
-                    assertTrue(pageManager.getMapPage().isPersonalSectionActive());
+                    assertTrue(mapPage.isPersonalSectionActive());
                     break;
                 }
                 case "Live": {
-                    assertTrue(pageManager.getMapPage().isLiveSectionActive());
+                    assertTrue(mapPage.isLiveSectionActive());
                     break;
                 }
                 default: {

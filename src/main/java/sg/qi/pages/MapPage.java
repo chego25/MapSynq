@@ -1,32 +1,20 @@
 package sg.qi.pages;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
 import sg.qi.utilities.DriverFactory;
 import sg.qi.utilities.WaitUtility;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class MapPage extends LoadableComponent<MapPage> {
 
-    private WebDriver driver;
-
     public MapPage() {
-        driver = DriverFactory.getDriver();
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        for (int i = 1; i < tabs.size(); i++) {
-            driver.switchTo().window(tabs.get(i));
-            driver.close();
-        }
-        driver.switchTo().window(tabs.get(0));
         ResourceBundle resourceBundle = ResourceBundle.getBundle("constants");
-        driver.navigate().to(resourceBundle.getString("APP_URL"));
-        PageFactory.initElements(driver, this);
+        DriverFactory.getDriver().navigate().to(resourceBundle.getString("APP_URL"));
+        PageFactory.initElements(DriverFactory.getDriver(), this);
     }
 
     @Override
@@ -36,16 +24,27 @@ public class MapPage extends LoadableComponent<MapPage> {
 
     @Override
     protected void isLoaded() throws Error {
-        if (WaitUtility.waitUntilVisibilityOf(addCollapseButton, driver)) {
+        if (WaitUtility.waitUntilVisibilityOf(addCollapseButton, DriverFactory.getDriver())) {
             WaitUtility.waitUntil(2);
-            JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+            JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverFactory.getDriver();
             javascriptExecutor.executeScript("arguments[0].click();", addCollapseButton);
-            WaitUtility.waitUntilVisibilityOf(addExpandButton, driver);
+            WaitUtility.waitUntilVisibilityOf(addExpandButton, DriverFactory.getDriver());
         }
     }
 
+    private void switchDriver() {
+        ArrayList<String> tabs = new ArrayList<>(DriverFactory.getDriver().getWindowHandles());
+        for (int i = 1; i < tabs.size(); i++) {
+            DriverFactory.getDriver().switchTo().window(tabs.get(i));
+            DriverFactory.getDriver().close();
+        }
+        DriverFactory.getDriver().switchTo().window(tabs.get(0));
+        PageFactory.initElements(DriverFactory.getDriver(), this);
+    }
+
     public String getTitle() {
-        return driver.getTitle();
+        switchDriver();
+        return DriverFactory.getDriver().getTitle();
     }
 
     // Links and Navigation
@@ -72,10 +71,10 @@ public class MapPage extends LoadableComponent<MapPage> {
     private WebElement registerPageLink;
 
     @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[6]/a")
-    private WebElement legendDialogLink;
+    private WebElement calendarDialogLink;
 
     @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[6]/a[2]")
-    private WebElement calendarDialogLink;
+    private WebElement legendDialogLink;
 
     @FindBy(xpath = "//div[@class='footer']/a")
     private WebElement feedbackModalLink;
@@ -98,77 +97,100 @@ public class MapPage extends LoadableComponent<MapPage> {
     @FindBy(xpath = "//div[@class='pp_content_container']/header")
     private WebElement faqHeader;
 
-    @FindBy(xpath = "//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable']")
+    @FindBy(xpath = "//body/div[7]")
     private WebElement legendDialog;
 
-    @FindBy(xpath = "//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable']/div/a")
+    @FindBy(xpath = "//body/div[7]/div/a")
     private WebElement legendCloseButton;
 
-    @FindBy(xpath = "//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable'][2]")
+    @FindBy(xpath = "//body/div[7]")
     private WebElement calendarDialog;
 
-    @FindBy(xpath = "//div[@class='ui-dialog ui-widget ui-widget-content ui-corner-all ui-draggable'][2]/div/a")
+    @FindBy(xpath = "//body/div[7]/div/a")
     private WebElement calendarCloseButton;
 
     public void clickOnLoginPageLink() {
+        switchDriver();
         loginPageLink.click();
     }
 
     public void clickOnRegisterPageLink() {
+        switchDriver();
         registerPageLink.click();
     }
 
     public void clickOnAppPageLink() {
+        switchDriver();
         appPageLink.click();
     }
 
     public void clickOnGalactioPageLink() {
+        switchDriver();
         galactioPageLink.click();
     }
 
     public void clickOnStorePageLink() {
+        switchDriver();
         storePageLink.click();
     }
 
     public void clickOnLegendDialogLink() {
+        switchDriver();
         legendDialogLink.click();
     }
 
     public void clickOnCalendarDialogLink() {
+        switchDriver();
         calendarDialogLink.click();
     }
 
     public void clickOnAboutPageLink() {
+        switchDriver();
         aboutPageLink.click();
     }
 
     public void clickOnTnCPageLink() {
+        switchDriver();
         tncPageLink.click();
     }
 
     public void clickOnFeedbackDialogLink() {
+        switchDriver();
         feedbackModalLink.click();
 
     }
 
     public void clickOnFAQDialogLink() {
+        switchDriver();
         faqModalLink.click();
     }
 
     public boolean isFeedbackDialogVisible() {
-        return WaitUtility.waitUntilVisibilityOf(modalContainer, driver) && WaitUtility.waitUntilVisibilityOf(feedbackInput, driver);
+        switchDriver();
+        return WaitUtility.waitUntilVisibilityOf(modalContainer, DriverFactory.getDriver())
+            && WaitUtility.waitUntilVisibilityOf(feedbackInput, DriverFactory.getDriver());
     }
 
     public boolean isFAQDialogVisible() {
-        return WaitUtility.waitUntilVisibilityOf(modalContainer, driver) && WaitUtility.waitUntilVisibilityOf(faqHeader, driver);
+        switchDriver();
+        return WaitUtility.waitUntilVisibilityOf(modalContainer, DriverFactory.getDriver())
+            && WaitUtility.waitUntilVisibilityOf(faqHeader, DriverFactory.getDriver());
     }
 
     public boolean isLegendDialogVisible() {
-        return WaitUtility.waitUntilVisibilityOf(legendDialog, driver) && WaitUtility.waitUntilVisibilityOf(legendCloseButton, driver);
+        switchDriver();
+        System.out.println("Legend Dialog: " + WaitUtility.waitUntilVisibilityOf(legendDialog, DriverFactory.getDriver()));
+        System.out.println("Legend Close: " + WaitUtility.waitUntilVisibilityOf(legendCloseButton, DriverFactory.getDriver()));
+        return WaitUtility.waitUntilVisibilityOf(legendDialog, DriverFactory.getDriver())
+            && WaitUtility.waitUntilVisibilityOf(legendCloseButton, DriverFactory.getDriver());
     }
 
     public boolean isCalendarDialogVisible() {
-        return WaitUtility.waitUntilVisibilityOf(calendarDialog, driver) && WaitUtility.waitUntilVisibilityOf(calendarCloseButton, driver);
+        switchDriver();
+        System.out.println("Calendar Dialog: " + WaitUtility.waitUntilVisibilityOf(calendarDialog, DriverFactory.getDriver()));
+        System.out.println("Calendar Close: " + WaitUtility.waitUntilVisibilityOf(calendarCloseButton, DriverFactory.getDriver()));
+        return WaitUtility.waitUntilVisibilityOf(calendarDialog, DriverFactory.getDriver())
+            && WaitUtility.waitUntilVisibilityOf(calendarCloseButton, DriverFactory.getDriver());
     }
 
     // Menu and Sections
@@ -183,44 +205,50 @@ public class MapPage extends LoadableComponent<MapPage> {
     private WebElement liveSectionButton;
 
     public void clickOnDirectionsSectionButton() {
+        switchDriver();
         String xpath = "//div[@class='left_tab']/a";
         String script = "document.evaluate(\"" + xpath + "\", document, null, "
                 + "XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverFactory.getDriver();
         javascriptExecutor.executeScript(script);
     }
 
     public void clickOnPersonalSectionButton() {
+        switchDriver();
         String xpath = "//div[@class='left_tab']/a[2]";
         String script = "document.evaluate(\"" + xpath + "\", document, null, "
                 + "XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverFactory.getDriver();
         javascriptExecutor.executeScript(script);
     }
 
     public void clickOnLiveSectionButton() {
+        switchDriver();
         String xpath = "//div[@class='left_tab']/a[3]";
         String script = "document.evaluate(\"" + xpath + "\", document, null, "
                 + "XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverFactory.getDriver();
         javascriptExecutor.executeScript(script);
     }
 
     public boolean isDirectionsSectionActive() {
+        switchDriver();
         directionsSectionButton = DriverFactory.getDriver().findElement(By.xpath("//div[@class='left_tab']/a"));
-        System.out.println(directionsSectionButton.getAttribute("class"));
+        System.out.println("Directions: " + directionsSectionButton.getAttribute("class"));
         return directionsSectionButton.getAttribute("class").contains("tab_active");
     }
 
     public boolean isPersonalSectionActive() {
+        switchDriver();
         personalSectionButton = DriverFactory.getDriver().findElement(By.xpath("//div[@class='left_tab']/a[2]"));
-        System.out.println(personalSectionButton.getAttribute("class"));
+        System.out.println("Personal: " + personalSectionButton.getAttribute("class"));
         return personalSectionButton.getAttribute("class").contains("tab_active");
     }
 
     public boolean isLiveSectionActive() {
+        switchDriver();
         liveSectionButton = DriverFactory.getDriver().findElement(By.xpath("//div[@class='left_tab']/a[3]"));
-        System.out.println(liveSectionButton.getAttribute("class"));
+        System.out.println("Live: " + liveSectionButton.getAttribute("class"));
         return liveSectionButton.getAttribute("class").contains("tab_active");
     }
 
