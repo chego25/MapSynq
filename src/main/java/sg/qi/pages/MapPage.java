@@ -252,4 +252,130 @@ public class MapPage extends LoadableComponent<MapPage> {
         return liveSectionButton.getAttribute("class").contains("tab_active");
     }
 
+    // Directions Section
+
+    @FindBy(xpath = "//input[@id='poi_from']")
+    private WebElement directionsFromField;
+
+    @FindBy(xpath = "//input[@class='sprite route_swap_button']")
+    private WebElement directionsToField;
+
+    @FindBy(xpath = "//input[@id='poi_to']")
+    private WebElement directionsSwapButton;
+
+    @FindBy(xpath = "//input[@id='also_traffic']")
+    private WebElement directionsTrafficCheck;
+
+    @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[3]/td[2]/span")
+    private WebElement directionsTrafficText;
+
+    @FindBy(xpath = "//input[@id='also_erp']")
+    private WebElement directionsTollCheck;
+
+    @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[3]/td[3]/span")
+    private WebElement directionsTollText;
+
+    @FindBy(xpath = "//input[@id='also_fastest']")
+    private WebElement directionsFastestCheck;
+
+    @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[4]/td/span")
+    private WebElement directionsFastestText;
+
+    @FindBy(xpath = "//input[@id='also_shortest']")
+    private WebElement directionsShortestCheck;
+
+    @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[4]/td[2]/span")
+    private WebElement directionsShortestText;
+
+    @FindBy(xpath = "//a[@id='btnClear']")
+    private WebElement directionsClearLink;
+
+    @FindBy(xpath = "//input[@id='get_direction']")
+    private WebElement directionsSubmitButton;
+
+    public void typeInDirectionsFromField(String text) {
+        switchDriver();
+        directionsFromField.sendKeys(text);
+    }
+
+    public void typeInDirectionsToField(String text) {
+        switchDriver();
+        directionsToField.sendKeys(text);
+    }
+
+    public void swapDirectionFieldEntries() {
+        switchDriver();
+        directionsSwapButton.click();
+    }
+
+    public String getDirectionsTrafficText() {
+        switchDriver();
+        return directionsTrafficText.getText();
+    }
+
+    public boolean isDirectionsTrafficChecked() {
+        switchDriver();
+        return directionsTrafficCheck.getAttribute("checked").equals("checked");
+    }
+
+    public void toggleDirectionsTrafficCheck() {
+        switchDriver();
+        directionsTrafficCheck.click();
+    }
+
+    public String getDirectionsTollText() {
+        switchDriver();
+        return directionsTollText.getText();
+    }
+
+    public boolean isDirectionsTollChecked() {
+        switchDriver();
+        return directionsTollCheck.getAttribute("checked").equals("checked");
+    }
+
+    public void toggleDirectionsTollCheck() {
+        switchDriver();
+        directionsTollCheck.click();
+    }
+
+    public String getDirectionsFastestText() {
+        switchDriver();
+        return directionsFastestText.getText();
+    }
+
+    public boolean isDirectionsFastestChecked() {
+        switchDriver();
+        return directionsFastestCheck.getAttribute("checked").equals("checked");
+    }
+
+    public void toggleDirectionsFastestCheck() {
+        switchDriver();
+        directionsFastestCheck.click();
+    }
+
+    public String getDirectionsShortestText() {
+        switchDriver();
+        return directionsShortestText.getText();
+    }
+
+    public boolean isDirectionsShortestChecked() {
+        switchDriver();
+        return directionsShortestCheck.getAttribute("checked").equals("checked");
+    }
+
+    public void toggleDirectionsShortestCheck() {
+        switchDriver();
+        directionsShortestCheck.click();
+    }
+
+    public void clickOnDirectionsClearLink() {
+        switchDriver();
+        directionsClearLink.click();
+    }
+
+    public void clickOnDirectionsSubmitButton() {
+        switchDriver();
+        directionsSubmitButton.click();
+    }
+
 }

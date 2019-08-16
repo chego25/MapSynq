@@ -11,7 +11,7 @@ import sg.qi.utilities.DriverManager;
 import sg.qi.utilities.PageManager;
 import static org.junit.Assert.assertEquals;
 
-public class NavigationStep {
+public class PagesNavigationSteps {
 
     private MapPage mapPage;
     private LoginPage loginPage;
@@ -23,7 +23,7 @@ public class NavigationStep {
     private TnCPage tncPage;
     private PasswordPage passwordPage;
 
-    public NavigationStep(DriverManager driverManager, PageManager pageManager) {
+    public PagesNavigationSteps(DriverManager driverManager, PageManager pageManager) {
         mapPage = pageManager.getMapPage();
         loginPage = pageManager.getLoginPage();
         registerPage = pageManager.getRegisterPage();

@@ -8,22 +8,20 @@ import org.openqa.selenium.UnsupportedCommandException;
 import sg.qi.pages.MapPage;
 import sg.qi.utilities.DriverManager;
 import sg.qi.utilities.PageManager;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class MapModalStep {
+public class MapPageDialogsSteps {
 
     private MapPage mapPage;
 
-    public MapModalStep(DriverManager driverManager, PageManager pageManager) {
+    public MapPageDialogsSteps(DriverManager driverManager, PageManager pageManager) {
         mapPage = pageManager.getMapPage();
     }
 
-    @When("^he clicks on the (.*) Modal link in the Map Page$")
-    public void he_clicks_on_the_param_modal_link_in_the_Map_page(String modalName) {
+    @When("^he clicks on the (.*) Dialog link in the Map Page$")
+    public void he_clicks_on_the_param_dialog_link_in_the_map_page(String dialogName) {
         try {
-            switch (modalName) {
+            switch (dialogName) {
                 case "Feedback": {
                     mapPage.clickOnFeedbackDialogLink();
                     break;
@@ -41,7 +39,7 @@ public class MapModalStep {
                     break;
                 }
                 default: {
-                    throw new UnsupportedCommandException("Modal \'" + modalName + "\' is not inside the scope");
+                    throw new UnsupportedCommandException("Modal \'" + dialogName + "\' is not inside the scope");
                 }
             }
         }
@@ -50,10 +48,10 @@ public class MapModalStep {
         }
     }
 
-    @Then("^the (.*) Modal should be appearing in the UI$")
-    public void the_param_modal_should_be_appearing_in_the_UI(String modalName) {
+    @Then("^the (.*) Dialog should be appearing in the UI$")
+    public void the_param_dialog_should_be_appearing_in_the_ui(String dialogName) {
         try {
-            switch (modalName) {
+            switch (dialogName) {
                 case "Feedback": {
                     assertTrue(mapPage.isFeedbackDialogVisible());
                     break;
@@ -71,7 +69,7 @@ public class MapModalStep {
                     break;
                 }
                 default: {
-                    throw new UnsupportedCommandException("Modal \'" + modalName + "\' is not inside the scope");
+                    throw new UnsupportedCommandException("Modal \'" + dialogName + "\' is not inside the scope");
                 }
             }
         }

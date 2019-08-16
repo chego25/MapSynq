@@ -7,11 +7,11 @@ import sg.qi.utilities.DriverManager;
 import sg.qi.utilities.PageManager;
 import static org.junit.Assert.assertEquals;
 
-public class FirstLoadStep {
+public class MapSynqFirstLoadSteps {
 
     private MapPage mapPage;
 
-    public FirstLoadStep(DriverManager driverManager, PageManager pageManager) {
+    public MapSynqFirstLoadSteps(DriverManager driverManager, PageManager pageManager) {
         mapPage = pageManager.getMapPage();
     }
 

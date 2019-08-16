@@ -1,9 +1,10 @@
-Feature: Page Navigation
+Feature: Pages Navigation
 
   In MapSynq web application, there are a total of 9 pages among which a concrete navigation flow exists.
   This feature is responsible to validate the navigational requirements between those pages.
 
-  Scenario Outline: Page Navigation
+  @severity=critical
+  Scenario Outline: Pages Navigation
 
     Given a user is in the <source> Page of MapSynq application
     When he clicks on the <destination> Page link in the <source> Page

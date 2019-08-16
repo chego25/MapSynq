@@ -9,15 +9,13 @@ import org.openqa.selenium.UnsupportedCommandException;
 import sg.qi.pages.MapPage;
 import sg.qi.utilities.DriverManager;
 import sg.qi.utilities.PageManager;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class SectionSwitchStep {
+public class SwitchingSectionsSteps {
 
     private MapPage mapPage;
 
-    public SectionSwitchStep(DriverManager driverManager, PageManager pageManager) {
+    public SwitchingSectionsSteps(DriverManager driverManager, PageManager pageManager) {
         mapPage = pageManager.getMapPage();
     }
 
