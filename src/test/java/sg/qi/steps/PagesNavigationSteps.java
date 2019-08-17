@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.UnsupportedCommandException;
 import sg.qi.pages.*;
+import sg.qi.utilities.DriverFactory;
 import sg.qi.utilities.DriverManager;
 import sg.qi.utilities.PageManager;
 import static org.junit.Assert.assertEquals;
@@ -51,7 +52,7 @@ public class PagesNavigationSteps {
                     break;
                 }
                 case "App": {
-                    mapPage.clickOnAppPageLink();
+                    mapPage.clickOnAppPageLink1();
                     break;
                 }
                 default: {
@@ -79,7 +80,7 @@ public class PagesNavigationSteps {
                             break;
                         }
                         case "App": {
-                            mapPage.clickOnAppPageLink();
+                            mapPage.clickOnAppPageLink1();
                             break;
                         }
                         case "Galactio": {

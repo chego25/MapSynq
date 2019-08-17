@@ -4,40 +4,50 @@ import sg.qi.pages.*;
 
 public class PageManager {
 
+    private MapPage mapPage;
+    private LoginPage loginPage;
+    private RegisterPage registerPage;
+    private AppPage appPage;
+    private GalactioPage galactioPage;
+    private StorePage storePage;
+    private AboutPage aboutPage;
+    private TnCPage tncPage;
+    private PasswordPage passwordPage;
+
     public MapPage getMapPage() {
-        return new MapPage().get();
+        return (mapPage == null) ? mapPage = new MapPage().get() : mapPage;
     }
 
     public LoginPage getLoginPage() {
-        return new LoginPage().get();
+        return (loginPage == null) ? loginPage = new LoginPage().get() : loginPage;
     }
 
     public RegisterPage getRegisterPage() {
-        return new RegisterPage().get();
+        return (registerPage == null) ? registerPage = new RegisterPage().get() : registerPage;
     }
 
     public AppPage getAppPage() {
-        return new AppPage().get();
+        return (appPage == null) ? appPage = new AppPage().get() : appPage;
     }
 
     public GalactioPage getGalactioPage() {
-        return new GalactioPage().get();
+        return (galactioPage == null) ? galactioPage = new GalactioPage().get() : galactioPage;
     }
 
     public StorePage getStorePage() {
-        return new StorePage().get();
+        return (storePage == null) ? storePage = new StorePage().get() : storePage;
     }
 
     public AboutPage getAboutPage() {
-        return new AboutPage().get();
+        return (aboutPage == null) ? aboutPage = new AboutPage().get() : aboutPage;
     }
 
     public TnCPage getTnCPage() {
-        return new TnCPage().get();
+        return (tncPage == null) ? tncPage = new TnCPage().get() : tncPage;
     }
 
     public PasswordPage getPasswordPage() {
-        return new PasswordPage().get();
+        return (passwordPage == null) ? passwordPage = new PasswordPage().get() : passwordPage;
     }
 
 }

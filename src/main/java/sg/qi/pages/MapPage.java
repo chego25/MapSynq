@@ -58,7 +58,7 @@ public class MapPage extends LoadableComponent<MapPage> {
     private WebElement addExpandButton;
 
     @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[2]/a")
-    private WebElement appPageLink;
+    private WebElement appPageLink1;
 
     @FindBy(xpath = "//div[@class='account_bar_wrapper']/div[2]/a[2]")
     private WebElement galactioPageLink;
@@ -121,9 +121,9 @@ public class MapPage extends LoadableComponent<MapPage> {
         registerPageLink.click();
     }
 
-    public void clickOnAppPageLink() {
+    public void clickOnAppPageLink1() {
         switchDriver();
-        appPageLink.click();
+        appPageLink1.click();
     }
 
     public void clickOnGalactioPageLink() {
@@ -443,6 +443,26 @@ public class MapPage extends LoadableComponent<MapPage> {
                 return false;
             }
         }
+    }
+
+    // Personal Section
+
+    @FindBy(xpath = "//div[@class='onesynq_para']/div[2]/p/a")
+    private WebElement appPageLink2;
+
+    @FindBy(xpath = "//div[@class='onesynq_para']/input")
+    private WebElement registerPageButton;
+
+    public void clickOnAppPageLink2() {
+        switchDriver();
+        clickOnPersonalSectionButton();
+        appPageLink2.click();
+    }
+
+    public void clickOnRegisterPageButton() {
+        switchDriver();
+        clickOnPersonalSectionButton();
+        registerPageButton.click();
     }
 
 }
