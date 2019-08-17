@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
+import sg.qi.utilities.AlertUtility;
 import sg.qi.utilities.DriverFactory;
 import sg.qi.utilities.WaitUtility;
 import java.util.ArrayList;
@@ -18,9 +19,7 @@ public class MapPage extends LoadableComponent<MapPage> {
     }
 
     @Override
-    protected void load() {
-
-    }
+    protected void load() {}
 
     @Override
     protected void isLoaded() throws Error {
@@ -39,6 +38,9 @@ public class MapPage extends LoadableComponent<MapPage> {
             DriverFactory.getDriver().close();
         }
         DriverFactory.getDriver().switchTo().window(tabs.get(0));
+        if (AlertUtility.isAlertPresent(DriverFactory.getDriver())) {
+            AlertUtility.acceptAlert(DriverFactory.getDriver());
+        }
         PageFactory.initElements(DriverFactory.getDriver(), this);
     }
 
@@ -179,16 +181,12 @@ public class MapPage extends LoadableComponent<MapPage> {
 
     public boolean isLegendDialogVisible() {
         switchDriver();
-        System.out.println("Legend Dialog: " + WaitUtility.waitUntilVisibilityOf(legendDialog, DriverFactory.getDriver()));
-        System.out.println("Legend Close: " + WaitUtility.waitUntilVisibilityOf(legendCloseButton, DriverFactory.getDriver()));
         return WaitUtility.waitUntilVisibilityOf(legendDialog, DriverFactory.getDriver())
             && WaitUtility.waitUntilVisibilityOf(legendCloseButton, DriverFactory.getDriver());
     }
 
     public boolean isCalendarDialogVisible() {
         switchDriver();
-        System.out.println("Calendar Dialog: " + WaitUtility.waitUntilVisibilityOf(calendarDialog, DriverFactory.getDriver()));
-        System.out.println("Calendar Close: " + WaitUtility.waitUntilVisibilityOf(calendarCloseButton, DriverFactory.getDriver()));
         return WaitUtility.waitUntilVisibilityOf(calendarDialog, DriverFactory.getDriver())
             && WaitUtility.waitUntilVisibilityOf(calendarCloseButton, DriverFactory.getDriver());
     }
@@ -257,31 +255,31 @@ public class MapPage extends LoadableComponent<MapPage> {
     @FindBy(xpath = "//input[@id='poi_from']")
     private WebElement directionsFromField;
 
-    @FindBy(xpath = "//input[@class='sprite route_swap_button']")
+    @FindBy(xpath = "//input[@id='poi_to']")
     private WebElement directionsToField;
 
-    @FindBy(xpath = "//input[@id='poi_to']")
+    @FindBy(xpath = "//input[@class='sprite route_swap_button']")
     private WebElement directionsSwapButton;
 
-    @FindBy(xpath = "//input[@id='also_traffic']")
+    @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[3]/td[2]/input")
     private WebElement directionsTrafficCheck;
 
     @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[3]/td[2]/span")
     private WebElement directionsTrafficText;
 
-    @FindBy(xpath = "//input[@id='also_erp']")
+    @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[3]/td[3]/input")
     private WebElement directionsTollCheck;
 
     @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[3]/td[3]/span")
     private WebElement directionsTollText;
 
-    @FindBy(xpath = "//input[@id='also_fastest']")
+    @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[4]/td/input")
     private WebElement directionsFastestCheck;
 
     @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[4]/td/span")
     private WebElement directionsFastestText;
 
-    @FindBy(xpath = "//input[@id='also_shortest']")
+    @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[4]/td[2]/input")
     private WebElement directionsShortestCheck;
 
     @FindBy(xpath = "//div[@id='directions_menu']/table/tbody/tr[4]/td[2]/span")
@@ -293,89 +291,158 @@ public class MapPage extends LoadableComponent<MapPage> {
     @FindBy(xpath = "//input[@id='get_direction']")
     private WebElement directionsSubmitButton;
 
+    @FindBy(xpath = "//div[@id='route_search_result']")
+    private WebElement directionsRouteContainer;
+
+    public String getTextInDirectionsFromField() {
+        switchDriver();
+        clickOnDirectionsSectionButton();
+        return directionsFromField.getAttribute("value");
+    }
+
     public void typeInDirectionsFromField(String text) {
         switchDriver();
+        clickOnDirectionsSectionButton();
+        directionsFromField.clear();
         directionsFromField.sendKeys(text);
+    }
+
+    public String getTextInDirectionsToField() {
+        switchDriver();
+        return directionsToField.getAttribute("value");
     }
 
     public void typeInDirectionsToField(String text) {
         switchDriver();
+        clickOnDirectionsSectionButton();
+        directionsToField.clear();
         directionsToField.sendKeys(text);
     }
 
     public void swapDirectionFieldEntries() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         directionsSwapButton.click();
     }
 
     public String getDirectionsTrafficText() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         return directionsTrafficText.getText();
     }
 
     public boolean isDirectionsTrafficChecked() {
         switchDriver();
-        return directionsTrafficCheck.getAttribute("checked").equals("checked");
+        clickOnDirectionsSectionButton();
+        try {
+            return directionsTrafficCheck.getAttribute("checked").equals("true");
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
     }
 
     public void toggleDirectionsTrafficCheck() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         directionsTrafficCheck.click();
     }
 
     public String getDirectionsTollText() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         return directionsTollText.getText();
     }
 
     public boolean isDirectionsTollChecked() {
         switchDriver();
-        return directionsTollCheck.getAttribute("checked").equals("checked");
+        clickOnDirectionsSectionButton();
+        try {
+            return directionsTollCheck.getAttribute("checked").equals("true");
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+
     }
 
     public void toggleDirectionsTollCheck() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         directionsTollCheck.click();
     }
 
     public String getDirectionsFastestText() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         return directionsFastestText.getText();
     }
 
     public boolean isDirectionsFastestChecked() {
         switchDriver();
-        return directionsFastestCheck.getAttribute("checked").equals("checked");
+        clickOnDirectionsSectionButton();
+        try {
+            return directionsFastestCheck.getAttribute("checked").equals("true");
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
     }
 
     public void toggleDirectionsFastestCheck() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         directionsFastestCheck.click();
     }
 
     public String getDirectionsShortestText() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         return directionsShortestText.getText();
     }
 
     public boolean isDirectionsShortestChecked() {
         switchDriver();
-        return directionsShortestCheck.getAttribute("checked").equals("checked");
+        clickOnDirectionsSectionButton();
+        try {
+            return directionsShortestCheck.getAttribute("checked").equals("true");
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
     }
 
     public void toggleDirectionsShortestCheck() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         directionsShortestCheck.click();
     }
 
     public void clickOnDirectionsClearLink() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         directionsClearLink.click();
     }
 
     public void clickOnDirectionsSubmitButton() {
         switchDriver();
+        clickOnDirectionsSectionButton();
         directionsSubmitButton.click();
+    }
+
+    public boolean isDirectionsRouteContainerVisible() {
+        if (AlertUtility.isAlertPresent(DriverFactory.getDriver())) {
+            return false;
+        }
+        else {
+            try {
+                WaitUtility.waitUntilVisibilityOf(directionsRouteContainer, DriverFactory.getDriver());
+                return true;
+            }
+            catch (TimeoutException e) {
+                return false;
+            }
+        }
     }
 
 }

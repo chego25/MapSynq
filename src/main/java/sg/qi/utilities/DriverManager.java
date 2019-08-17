@@ -1,5 +1,6 @@
 package sg.qi.utilities;
 
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.UnsupportedCommandException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,6 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.safari.SafariDriver;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,7 +59,9 @@ public class DriverManager {
             driverPath = driverPath + ".exe";
         }
         System.setProperty("webdriver.chrome.driver", driverPath);
-        return new ChromeDriver(new ChromeOptions());
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+        return new ChromeDriver(chromeOptions);
     }
 
     private FirefoxDriver getFirefoxDriver() throws UnsupportedCommandException {
@@ -66,7 +70,9 @@ public class DriverManager {
             driverPath = driverPath + ".exe";
         }
         System.setProperty("webdriver.gecko.driver", driverPath);
-        return new FirefoxDriver(new FirefoxOptions());
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+        return new FirefoxDriver(firefoxOptions);
     }
 
     private InternetExplorerDriver getInternetExplorerDriver() throws UnsupportedCommandException {
