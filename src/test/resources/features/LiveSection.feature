@@ -4,10 +4,12 @@ Feature: Live Section
   to various road conditions, viz. accidents, traffics, roadworks, road closure, obstacles etc. It also
   provides information about various cameras and tolls, installed on roads.
 
+  @severity=normal
   Scenario: Default Incident Sub-Section
     When a user tries to open MapSynq application
     Then the Live Incidents Sub-Section should be active by default
 
+  @severity=normal
   Scenario Outline: Sub-Sections Container Visibility
     Given a user tries to open MapSynq application
     When he clicks on the Live <subsection> Sub-Section button
@@ -29,6 +31,7 @@ Feature: Live Section
       | Tolls      | Thailand  | Thailand                       |
       | Tolls      | SriLanka  | SriLanka                       |
 
+  @severity=minor
   Scenario Outline: Sub-Sections Search Box Placeholder
     Given a user tries to open MapSynq application
     When he clicks on the Live <subsection> Sub-Section button
@@ -49,16 +52,19 @@ Feature: Live Section
       #| Tolls      | Thailand  | Search toll location     |
       #| Tolls      | SriLanka  | Search toll location     |
 
+  @severity=normal
   Scenario: Singapore Incidents List Dates
     Given a user tries to open MapSynq application
     When he clicks on the Live Incidents Sub-Section button
     Then the Live Incidents Singapore Date Selector List should contain today and the last 3 days
 
+  @severity=normal
   Scenario: Singapore Incidents List Order
     Given a user tries to open MapSynq application
     When he clicks on the Live Incidents Sub-Section button
     Then the Live Incidents Singapore should be ordered in a reverse chronological order
 
+  @severity=normal
   Scenario Outline: Switching to Other Sub-Sections
     Given a user tries to open MapSynq application
     When he clicks on the Live <subsection> Sub-Section button
@@ -69,6 +75,7 @@ Feature: Live Section
       | Cameras     |
       | Tolls       |
 
+  @severity=normal
   Scenario Outline: Sub-Sections List Content
     Given a user tries to open MapSynq application
     When he clicks on the Live <subsection> Sub-Section button
@@ -85,6 +92,7 @@ Feature: Live Section
       #| Tolls      | Thailand  |
       #| Tolls      | SriLanka  |
 
+  @severity=critical
   Scenario Outline: Sub-Sections Item Search
     Given a user tries to open MapSynq application
     And he clicks on the Live <subsection> Sub-Section button

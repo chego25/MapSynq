@@ -4,6 +4,7 @@ Feature: Directions Section
   to the user who is commuting or about to commute from a source to a destination. As the result comes
   in the embedded Google Maps, only form related functionalities will be tested here in this feature.
 
+  @severity=minor
   Scenario: Directions Checks
     Given a user tries to open MapSynq application
     When he clicks on the Directions Section button
@@ -18,6 +19,7 @@ Feature: Directions Section
     And the Shortest Check should have the text "Shortest"
     And the Shortest Check should have the status "unchecked"
 
+  @severity=normal
   Scenario: Directions Swap
     Given a user tries to open MapSynq application
     And he clicks on the Directions Section button
@@ -27,6 +29,7 @@ Feature: Directions Section
     Then the Source Field should have the text "Merlion"
     And the Destination Field should have the text "Resorts World Sentosa"
 
+  @severity=normal
   Scenario: Directions Clear
     Given a user tries to open MapSynq application
     And he clicks on the Directions Section button
@@ -44,6 +47,7 @@ Feature: Directions Section
     And the Fastest Check should have the status "unchecked"
     And the Shortest Check should have the status "unchecked"
 
+  @severity=critical
   Scenario: Directions Search
     Given a user tries to open MapSynq application
     And he clicks on the Directions Section button

@@ -4,6 +4,7 @@ Feature: MapSynq Global Search
   This feature is responsible to test the visibility of the MapSynq Search Result upon a user initiated Global
   Search.
 
+  @severity=critical
   Scenario: MapSynq Global Search
     Given a user tries to open MapSynq application
     And he types the string "Woodlands Causeway (Towards Johor)" in the Global Search Field

@@ -9,6 +9,7 @@ Feature: Switching Sections
     Given a user tries to open MapSynq application
     Then the Live Section should be active by default
 
+  @severity=normal
   Scenario Outline: Switching Sections
     Given a user tries to open MapSynq application
     When he clicks on the <section> Section button
