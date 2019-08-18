@@ -1,6 +1,7 @@
 package sg.qi.pages;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.LoadableComponent;
@@ -8,6 +9,7 @@ import sg.qi.utilities.AlertUtility;
 import sg.qi.utilities.DriverFactory;
 import sg.qi.utilities.WaitUtility;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MapPage extends LoadableComponent<MapPage> {
@@ -463,6 +465,526 @@ public class MapPage extends LoadableComponent<MapPage> {
         switchDriver();
         clickOnPersonalSectionButton();
         registerPageButton.click();
+    }
+
+    // Live Section
+
+    @FindBy(xpath = "//div[@id='news_menu']/div/label")
+    private WebElement liveIncidentsCheck;
+
+    @FindBy(xpath = "//div[@id='news_menu']/div/label/span/h2")
+    private WebElement liveIncidentsText;
+
+    @FindBy(xpath = "//div[@id='news_menu']/div/label[2]")
+    private WebElement liveCamerasCheck;
+
+    @FindBy(xpath = "//div[@id='news_menu']/div/label[2]/span/h2")
+    private WebElement liveCamerasText;
+
+    @FindBy(xpath = "//div[@id='news_menu']/div/label[3]")
+    private WebElement liveTollsCheck;
+
+    @FindBy(xpath = "//div[@id='news_menu']/div/label[3]/span/h2")
+    private WebElement liveTollsText;
+
+    public boolean isLiveIncidentsSubSectionActive() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return liveIncidentsCheck.getAttribute("class").contains("ui-state-active");
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public void clickOnLiveIncidentsCheck() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        String xpath = "//div[@id='news_menu']/div/label";
+        String script = "document.evaluate(\"" + xpath + "\", document, null, "
+                + "XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverFactory.getDriver();
+        javascriptExecutor.executeScript(script);
+        //liveIncidentsCheck.click();
+    }
+
+    public String getLiveIncidentsCheckText() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        return liveIncidentsText.getText();
+    }
+
+    public boolean isLiveCamerasSubSectionActive() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return liveCamerasCheck.getAttribute("class").contains("ui-state-active");
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public void clickOnLiveCamerasCheck() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        String xpath = "//div[@id='news_menu']/div/label[2]";
+        String script = "document.evaluate(\"" + xpath + "\", document, null, "
+                + "XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverFactory.getDriver();
+        javascriptExecutor.executeScript(script);
+        //liveIncidentsCheck.click();
+    }
+
+    public String getLiveCamerasCheckText() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        return liveCamerasText.getText();
+    }
+
+    public boolean isLiveTollsSubSectionActive() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return liveTollsCheck.getAttribute("class").contains("ui-state-active");
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public void clickOnLiveTollsCheck() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        String xpath = "//div[@id='news_menu']/div/label[3]";
+        String script = "document.evaluate(\"" + xpath + "\", document, null, "
+                + "XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();";
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) DriverFactory.getDriver();
+        javascriptExecutor.executeScript(script);
+        //liveIncidentsCheck.click();
+    }
+
+    public String getLiveTollsCheckText() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        return liveTollsText.getText();
+    }
+
+    // Live - Incidents Sub-Section
+
+    @FindBy(xpath = "//div[@id='singaporeIncidents']")
+    private WebElement singaporeIncidentsContainer;
+
+    @FindBy(xpath = "//div[@id='singaporeIncidents']/div/h3")
+    private WebElement singaporeIncidentsHeader;
+
+    @FindBy(xpath = "//div[@id='malaysiaIncidents']")
+    private WebElement malaysiaIncidentsContainer;
+
+    @FindBy(xpath = "//div[@id='malaysiaIncidents']/div/h3")
+    private WebElement malaysiaIncidentsHeader;
+
+    @FindBy(xpath = "//div[@id='thailandIncidents']")
+    private WebElement thailandIncidentsContainer;
+
+    @FindBy(xpath = "//div[@id='thailandIncidents']/div/h3")
+    private WebElement thailandIncidentsHeader;
+
+    @FindBy(xpath = "//div[@id='srilankaIncidents']")
+    private WebElement srilankaIncidentsContainer;
+
+    @FindBy(xpath = "//div[@id='srilankaIncidents']/div/h3")
+    private WebElement srilankaIncidentsHeader;
+
+    public boolean isLiveSingaporeIncidentsVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return singaporeIncidentsContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveSingaporeIncidentsHeader() {
+        try {
+            return singaporeIncidentsHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public boolean isLiveMalaysiaIncidentsVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return malaysiaIncidentsContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveMalaysiaIncidentsHeader() {
+        try {
+            return malaysiaIncidentsHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public boolean isLiveThailandIncidentsVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return thailandIncidentsContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveThailandIncidentsHeader() {
+        try {
+            return thailandIncidentsHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public boolean isLiveSriLankaIncidentsVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return srilankaIncidentsContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveSriLankaIncidentsHeader() {
+        try {
+            return srilankaIncidentsHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    @FindBy(xpath = "//input[@id='txtSearchIncidentsingapore']")
+    private WebElement singaporeIncidentsSearch;
+
+    @FindAll({ @FindBy(xpath = "//select[@id='selIncidentDays']/option") })
+    private List<WebElement> singaporeIncidentsDates;
+
+    @FindAll({ @FindBy(xpath = "//ul[@id='search_incident_singapore']/li/a/div/div[2]/div") })
+    private List<WebElement> singaporeIncidentsStamps;
+
+    public String getLiveSingaporeIncidentsSearchPlaceholder() {
+        try {
+            return singaporeIncidentsSearch.getAttribute("placeholder");
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public String[] getLiveSingaporeIncidentsDates() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        String[] dates = new String[singaporeIncidentsDates.size()];
+        for (int i = 0; i < dates.length; i++) {
+            dates[i] = singaporeIncidentsDates.get(i).getText().trim();
+        }
+        return dates;
+    }
+
+    public String[] getLiveSingaporeIncidentsStamps() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        String[] stamps = new String[singaporeIncidentsStamps.size()];
+        for (int i = 0; i < singaporeIncidentsStamps.size(); i++) {
+            stamps[i] = singaporeIncidentsStamps.get(i).getText().trim();
+        }
+        return stamps;
+    }
+
+    // Live - Cameras Sub-Section
+
+    @FindBy(xpath = "//div[@id='singaporeCameras']")
+    private WebElement singaporeCamerasContainer;
+
+    @FindBy(xpath = "//div[@id='singaporeCameras']/div/h3")
+    private WebElement singaporeCamerasHeader;
+
+    @FindBy(xpath = "//div[@id='malaysiaCameras']")
+    private WebElement malaysiaCamerasContainer;
+
+    @FindBy(xpath = "//div[@id='malaysiaCameras']/div/h3")
+    private WebElement malaysiaCamerasHeader;
+
+    @FindBy(xpath = "//div[@id='thailandCameras']")
+    private WebElement thailandCamerasContainer;
+
+    @FindBy(xpath = "//div[@id='thailandCameras']/div/h3")
+    private WebElement thailandCamerasHeader;
+
+    @FindBy(xpath = "//div[@id='srilankaCameras']")
+    private WebElement srilankaCamerasContainer;
+
+    @FindBy(xpath = "//div[@id='srilankaCameras']/div/h3")
+    private WebElement srilankaCamerasHeader;
+
+    public boolean isLiveSingaporeCamerasVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return singaporeCamerasContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveSingaporeCamerasHeader() {
+        try {
+            return singaporeCamerasHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public boolean isLiveMalaysiaCamerasVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return malaysiaCamerasContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveMalaysiaCamerasHeader() {
+        try {
+            return malaysiaCamerasHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public boolean isLiveThailandCamerasVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return thailandCamerasContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveThailandCamerasHeader() {
+        try {
+            return thailandCamerasHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public boolean isLiveSriLankaCamerasVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return srilankaCamerasContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveSriLankaCamerasHeader() {
+        try {
+            return srilankaCamerasHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    @FindBy(xpath = "//input[@id='txtSearchCamerasingapore']")
+    private WebElement singaporeCamerasSearch;
+
+    @FindBy(xpath = "//input[@id='txtSearchCameramalaysia']")
+    private WebElement malaysiaCamerasSearch;
+
+    @FindBy(xpath = "//input[@id='txtSearchCamerasrilanka']")
+    private WebElement srilankaCamerasSearch;
+
+    public String getLiveSingaporeCamerasSearchPlaceholder() {
+        try {
+            return singaporeCamerasSearch.getAttribute("placeholder");
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public String getLiveMalaysiaCamerasSearchPlaceholder() {
+        try {
+            return malaysiaCamerasSearch.getAttribute("placeholder");
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public String getLiveSriLankaCamerasSearchPlaceholder() {
+        try {
+            return srilankaCamerasSearch.getAttribute("placeholder");
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    // Live - Tolls Sub-Section
+
+    @FindBy(xpath = "//div[@id='singaporeTolls']")
+    private WebElement singaporeTollsContainer;
+
+    @FindBy(xpath = "//div[@id='singaporeTolls']/div")
+    private WebElement singaporeTollsHeader;
+
+    @FindBy(xpath = "//div[@id='malaysiaTolls']")
+    private WebElement malaysiaTollsContainer;
+
+    @FindBy(xpath = "//div[@id='malaysiaTolls']/div")
+    private WebElement malaysiaTollsHeader;
+
+    @FindBy(xpath = "//div[@id='thailandTolls']")
+    private WebElement thailandTollsContainer;
+
+    @FindBy(xpath = "//div[@id='thailandTolls']/div")
+    private WebElement thailandTollsHeader;
+
+    @FindBy(xpath = "//div[@id='srilankaTolls']")
+    private WebElement srilankaTollsContainer;
+
+    @FindBy(xpath = "//div[@id='srilankaTolls']/div")
+    private WebElement srilankaTollsHeader;
+
+    public boolean isLiveSingaporeTollsVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return singaporeTollsContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveSingaporeTollsHeader() {
+        try {
+            return singaporeTollsHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public boolean isLiveMalaysiaTollsVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return malaysiaTollsContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveMalaysiaTollsHeader() {
+        try {
+            return malaysiaTollsHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public boolean isLiveThailandTollsVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return thailandTollsContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveThailandTollsHeader() {
+        try {
+            return thailandTollsHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public boolean isLiveSriLankaTollsVisible() {
+        switchDriver();
+        clickOnLiveSectionButton();
+        try {
+            return srilankaTollsContainer.isDisplayed();
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
+    }
+
+    public String getLiveSriLankaTollsHeader() {
+        try {
+            return srilankaTollsHeader.getText();
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    @FindBy(xpath = "//input[@id='txtSearchERPsingapore']")
+    private WebElement singaporeTollsSearch;
+
+    @FindBy(xpath = "//input[@id='txtSearchERPmalaysia']")
+    private WebElement malaysiaTollsSearch;
+
+    public String getLiveSingaporeTollsSearchPlaceholder() {
+        try {
+            return singaporeTollsSearch.getAttribute("placeholder");
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
+    }
+
+    public String getLiveMalaysiaTollsSearchPlaceholder() {
+        try {
+            return malaysiaTollsSearch.getAttribute("placeholder");
+        }
+        catch (NullPointerException e) {
+            return "";
+        }
     }
 
 }

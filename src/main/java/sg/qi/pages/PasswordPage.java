@@ -13,14 +13,10 @@ public class PasswordPage extends LoadableComponent<PasswordPage> {
     }
 
     @Override
-    protected void load() {
-
-    }
+    protected void load() {}
 
     @Override
-    protected void isLoaded() throws Error {
-
-    }
+    protected void isLoaded() throws Error {}
 
     private void switchDriver() {
         ArrayList<String> tabs = new ArrayList<>(DriverFactory.getDriver().getWindowHandles());

@@ -12,7 +12,8 @@ import org.junit.runner.RunWith;
                 "src/test/resources/MapPageDialogs.feature",
                 "src/test/resources/SwitchingSections.feature",
                 "src/test/resources/DirectionsSection.feature",
-                "src/test/resources/PersonalSection.feature"
+                "src/test/resources/PersonalSection.feature",
+                "src/test/resources/LiveSection.feature"
         },
         glue = {
                 "sg.qi.steps",
