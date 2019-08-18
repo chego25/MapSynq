@@ -582,20 +582,11 @@ public class MapPage extends LoadableComponent<MapPage> {
     @FindBy(xpath = "//div[@id='malaysiaIncidents']")
     private WebElement malaysiaIncidentsContainer;
 
-    @FindBy(xpath = "//div[@id='malaysiaIncidents']/div/h3")
-    private WebElement malaysiaIncidentsHeader;
-
     @FindBy(xpath = "//div[@id='thailandIncidents']")
     private WebElement thailandIncidentsContainer;
 
-    @FindBy(xpath = "//div[@id='thailandIncidents']/div/h3")
-    private WebElement thailandIncidentsHeader;
-
     @FindBy(xpath = "//div[@id='srilankaIncidents']")
     private WebElement srilankaIncidentsContainer;
-
-    @FindBy(xpath = "//div[@id='srilankaIncidents']/div/h3")
-    private WebElement srilankaIncidentsHeader;
 
     public boolean isLiveSingaporeIncidentsVisible() {
         switchDriver();
@@ -628,15 +619,6 @@ public class MapPage extends LoadableComponent<MapPage> {
         }
     }
 
-    public String getLiveMalaysiaIncidentsHeader() {
-        try {
-            return malaysiaIncidentsHeader.getText();
-        }
-        catch (NullPointerException e) {
-            return "";
-        }
-    }
-
     public boolean isLiveThailandIncidentsVisible() {
         switchDriver();
         clickOnLiveSectionButton();
@@ -648,15 +630,6 @@ public class MapPage extends LoadableComponent<MapPage> {
         }
     }
 
-    public String getLiveThailandIncidentsHeader() {
-        try {
-            return thailandIncidentsHeader.getText();
-        }
-        catch (NullPointerException e) {
-            return "";
-        }
-    }
-
     public boolean isLiveSriLankaIncidentsVisible() {
         switchDriver();
         clickOnLiveSectionButton();
@@ -665,15 +638,6 @@ public class MapPage extends LoadableComponent<MapPage> {
         }
         catch (NullPointerException e) {
             return false;
-        }
-    }
-
-    public String getLiveSriLankaIncidentsHeader() {
-        try {
-            return srilankaIncidentsHeader.getText();
-        }
-        catch (NullPointerException e) {
-            return "";
         }
     }
 
@@ -732,9 +696,6 @@ public class MapPage extends LoadableComponent<MapPage> {
     @FindBy(xpath = "//div[@id='thailandCameras']")
     private WebElement thailandCamerasContainer;
 
-    @FindBy(xpath = "//div[@id='thailandCameras']/div/h3")
-    private WebElement thailandCamerasHeader;
-
     @FindBy(xpath = "//div[@id='srilankaCameras']")
     private WebElement srilankaCamerasContainer;
 
@@ -792,15 +753,6 @@ public class MapPage extends LoadableComponent<MapPage> {
         }
     }
 
-    public String getLiveThailandCamerasHeader() {
-        try {
-            return thailandCamerasHeader.getText();
-        }
-        catch (NullPointerException e) {
-            return "";
-        }
-    }
-
     public boolean isLiveSriLankaCamerasVisible() {
         switchDriver();
         clickOnLiveSectionButton();
@@ -824,11 +776,20 @@ public class MapPage extends LoadableComponent<MapPage> {
     @FindBy(xpath = "//input[@id='txtSearchCamerasingapore']")
     private WebElement singaporeCamerasSearch;
 
+    @FindAll({ @FindBy(xpath = "//ul[@id='camera_location_singapore']/li/div") })
+    private List<WebElement> singaporeCamerasList;
+
     @FindBy(xpath = "//input[@id='txtSearchCameramalaysia']")
     private WebElement malaysiaCamerasSearch;
 
+    @FindAll({ @FindBy(xpath = "//ul[@id='camera_location_malaysia']/li/div") })
+    private List<WebElement> malaysiaCamerasList;
+
     @FindBy(xpath = "//input[@id='txtSearchCamerasrilanka']")
     private WebElement srilankaCamerasSearch;
+
+    @FindAll({ @FindBy(xpath = "//ul[@id='camera_location_srilanka']/li/div") })
+    private List<WebElement> sriLankaCamerasList;
 
     public String getLiveSingaporeCamerasSearchPlaceholder() {
         try {
@@ -837,6 +798,21 @@ public class MapPage extends LoadableComponent<MapPage> {
         catch (NullPointerException e) {
             return "";
         }
+    }
+
+    public void typeInLiveSingaporeCamerasSearch(String text) {
+        singaporeCamerasSearch.sendKeys(text);
+    }
+
+    public String[] getLiveSingaporeCamerasList() {
+        WaitUtility.waitUntil(2);
+        ArrayList<String> cameras = new ArrayList<>();
+        for (int i = 0; i < singaporeCamerasList.size(); i++) {
+            if (singaporeCamerasList.get(i).getCssValue("display").equals("block")) {
+                cameras.add(singaporeCamerasList.get(i).findElement(By.xpath("./a")).getText());
+            }
+        }
+        return cameras.toArray(new String[0]);
     }
 
     public String getLiveMalaysiaCamerasSearchPlaceholder() {
@@ -848,6 +824,21 @@ public class MapPage extends LoadableComponent<MapPage> {
         }
     }
 
+    public void typeInLiveMalaysiaCamerasSearch(String text) {
+        malaysiaCamerasSearch.sendKeys(text);
+    }
+
+    public String[] getLiveMalaysiaCamerasList() {
+        WaitUtility.waitUntil(2);
+        ArrayList<String> cameras = new ArrayList<>();
+        for (int i = 0; i < malaysiaCamerasList.size(); i++) {
+            if (malaysiaCamerasList.get(i).getCssValue("display").equals("block")) {
+                cameras.add(malaysiaCamerasList.get(i).findElement(By.xpath("./a")).getText());
+            }
+        }
+        return cameras.toArray(new String[0]);
+    }
+
     public String getLiveSriLankaCamerasSearchPlaceholder() {
         try {
             return srilankaCamerasSearch.getAttribute("placeholder");
@@ -855,6 +846,21 @@ public class MapPage extends LoadableComponent<MapPage> {
         catch (NullPointerException e) {
             return "";
         }
+    }
+
+    public void typeInLiveSriLankaCamerasSearch(String text) {
+        srilankaCamerasSearch.sendKeys(text);
+    }
+
+    public String[] getLiveSriLankaCamerasList() {
+        WaitUtility.waitUntil(2);
+        ArrayList<String> cameras = new ArrayList<>();
+        for (int i = 0; i < sriLankaCamerasList.size(); i++) {
+            if (sriLankaCamerasList.get(i).getCssValue("display").equals("block")) {
+                cameras.add(sriLankaCamerasList.get(i).findElement(By.xpath("./a")).getText());
+            }
+        }
+        return cameras.toArray(new String[0]);
     }
 
     // Live - Tolls Sub-Section
@@ -874,14 +880,8 @@ public class MapPage extends LoadableComponent<MapPage> {
     @FindBy(xpath = "//div[@id='thailandTolls']")
     private WebElement thailandTollsContainer;
 
-    @FindBy(xpath = "//div[@id='thailandTolls']/div")
-    private WebElement thailandTollsHeader;
-
     @FindBy(xpath = "//div[@id='srilankaTolls']")
     private WebElement srilankaTollsContainer;
-
-    @FindBy(xpath = "//div[@id='srilankaTolls']/div")
-    private WebElement srilankaTollsHeader;
 
     public boolean isLiveSingaporeTollsVisible() {
         switchDriver();
@@ -934,15 +934,6 @@ public class MapPage extends LoadableComponent<MapPage> {
         }
     }
 
-    public String getLiveThailandTollsHeader() {
-        try {
-            return thailandTollsHeader.getText();
-        }
-        catch (NullPointerException e) {
-            return "";
-        }
-    }
-
     public boolean isLiveSriLankaTollsVisible() {
         switchDriver();
         clickOnLiveSectionButton();
@@ -954,20 +945,17 @@ public class MapPage extends LoadableComponent<MapPage> {
         }
     }
 
-    public String getLiveSriLankaTollsHeader() {
-        try {
-            return srilankaTollsHeader.getText();
-        }
-        catch (NullPointerException e) {
-            return "";
-        }
-    }
-
     @FindBy(xpath = "//input[@id='txtSearchERPsingapore']")
     private WebElement singaporeTollsSearch;
 
+    @FindAll({ @FindBy(xpath = "//ul[@id='erp_locationsingapore']/li/div") })
+    private List<WebElement> singaporeTollsList;
+
     @FindBy(xpath = "//input[@id='txtSearchERPmalaysia']")
     private WebElement malaysiaTollsSearch;
+
+    @FindAll({ @FindBy(xpath = "//ul[@id='erp_locationmalaysia']/li/div") })
+    private List<WebElement> malaysiaTollsList;
 
     public String getLiveSingaporeTollsSearchPlaceholder() {
         try {
@@ -978,6 +966,21 @@ public class MapPage extends LoadableComponent<MapPage> {
         }
     }
 
+    public void typeInLiveSingaporeTollsSearch(String text) {
+        singaporeTollsSearch.sendKeys(text);
+    }
+
+    public String[] getLiveSingaporeTollsList() {
+        WaitUtility.waitUntil(2);
+        ArrayList<String> cameras = new ArrayList<>();
+        for (int i = 0; i < singaporeTollsList.size(); i++) {
+            if (singaporeTollsList.get(i).getCssValue("display").equals("block")) {
+                cameras.add(singaporeTollsList.get(i).findElement(By.xpath("./a")).getText());
+            }
+        }
+        return cameras.toArray(new String[0]);
+    }
+
     public String getLiveMalaysiaTollsSearchPlaceholder() {
         try {
             return malaysiaTollsSearch.getAttribute("placeholder");
@@ -985,6 +988,44 @@ public class MapPage extends LoadableComponent<MapPage> {
         catch (NullPointerException e) {
             return "";
         }
+    }
+
+    public void typeInLiveMalaysiaTollsSearch(String text) {
+        malaysiaTollsSearch.sendKeys(text);
+    }
+
+    public String[] getLiveMalaysiaTollsList() {
+        WaitUtility.waitUntil(2);
+        ArrayList<String> cameras = new ArrayList<>();
+        for (int i = 0; i < malaysiaTollsList.size(); i++) {
+            if (malaysiaTollsList.get(i).getCssValue("display").equals("block")) {
+                cameras.add(malaysiaTollsList.get(i).findElement(By.xpath("./a")).getText());
+            }
+        }
+        return cameras.toArray(new String[0]);
+    }
+
+    // Global Search
+
+    @FindBy(xpath = "//input[@id='txtGlobalSearch']")
+    private WebElement mapSynqGlobalSearch;
+
+    @FindBy(xpath = "//span[@class='search_icon sprite']")
+    private WebElement mapSynqSearchButton;
+
+    @FindBy(xpath = "//div[@class='search_result sprite']")
+    private WebElement mapSynqSearchResult;
+
+    public void typeInLiveMapSynqGlobalSearch(String text) {
+        mapSynqGlobalSearch.sendKeys(text);
+    }
+
+    public void clickOnMapSynqSearchButton() {
+        mapSynqSearchButton.click();
+    }
+
+    public boolean isMapSynqSearchResultVisible() {
+        return mapSynqSearchResult.isDisplayed();
     }
 
 }

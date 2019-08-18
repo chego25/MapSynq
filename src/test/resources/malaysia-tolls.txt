@@ -1,0 +1,63 @@
+Alam Impian
+Awan Besar (East)
+Awan Kecil (West)
+Ayer Hitam
+Ayer Panas
+Bagan Ajam
+Batu
+Batu 11
+Batu 9
+Bentong
+Bukit Jelutong
+Bukit Kajang
+Bukit Raja
+Damansara A
+Damansara B
+East-West Link (E)
+East-West Link (E)
+Elmina
+Gombak
+Kampung Medan
+Kapar
+Kapar (E) to Bukit Raja
+Kapar (E) to Port Klang
+Kapar (W) to Bukit Raja
+Kapar (W) to Port Klang
+Kemuning
+Keramat
+Kerinchi Link
+Kubang Semang
+Lagong
+Laluan Terus
+Lema-Kedai
+Lukut
+Lunas
+Mambau
+Mines (S)
+Mines (T)
+Mont. Kiara
+Pantai Dalam
+Pantai Dalam (T)
+Penang Bridge
+Penchala
+Perai
+Perling
+PETALING JAYA
+Pjs 5
+Puchong Barat
+Puchong Selatan
+Putrajaya
+Salak Link
+Salak Selatan
+Saujana Putra
+Sentul Pasar
+Seri Muda
+Sg. Nyior
+SMART Tunnel
+Sungai Balak
+Sungai Long
+Sungai Ramal (E)
+Sungai Ramal (W)
+Sunway
+Toll Gelang Patah
+Toll Kempas

@@ -10,7 +10,9 @@ import org.openqa.selenium.UnsupportedCommandException;
 import sg.qi.pages.MapPage;
 import sg.qi.utilities.DriverManager;
 import sg.qi.utilities.PageManager;
+import sg.qi.utilities.ReadFileUtility;
 
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -96,7 +98,7 @@ public class LiveSectionSteps {
         }
     }
 
-    @And("^the Live (.*) (.*) Container should be visible")
+    @And("^the Live (.*) (.*) Container should be visible$")
     public void the_live_param_param_container_should_be_visible(String subSectionName, String containerName) {
         try {
             switch (subSectionName) {
@@ -182,7 +184,7 @@ public class LiveSectionSteps {
         }
     }
 
-    @And("^the Live (.*) (.*) Container should have title \"(.*)\"")
+    @And("^the Live (.*) (.*) Container should have title \"(.*)\"$")
     public void the_live_param_param_container_should_have_title_param(String subSectionName, String containerName, String titleValue) {
         try {
             switch (subSectionName) {
@@ -244,7 +246,7 @@ public class LiveSectionSteps {
         }
     }
 
-    @And("^the Live (.*) (.*) Search Box should have placeholder \"(.*)\"")
+    @And("^the Live (.*) (.*) Search Box should have placeholder \"(.*)\"$")
     public void the_live_param_param_search_box_should_have_placeholder_param(String subSectionName, String containerName, String placeholderValue) {
         try {
             switch (subSectionName) {
@@ -306,7 +308,106 @@ public class LiveSectionSteps {
         }
     }
 
-    @And("^the Live Incidents (.*) Date Selector List should contain today and the last 3 days")
+    @And("^the Live (.*) (.*) must contain all of the required items$")
+    public void the_live_params_param_must_contain_all_of_the_required_items(String subSectionName, String containerName) {
+        try {
+            switch (subSectionName) {
+                case "Cameras": {
+                    switch (containerName) {
+                        case "Singapore": {
+                            String[] expected = ReadFileUtility.readFile("singapore-cameras");
+                            String[] actual = mapPage.getLiveSingaporeCamerasList();
+                            if (expected.length == actual.length) {
+                                for (int i = 0; i < actual.length; i++) {
+                                    assertEquals(expected[i], actual[i]);
+                                }
+                            }
+                            else {
+                                Assert.fail("Count of expected cameras is " + expected.length + " but found " + actual.length);
+                            }
+                            break;
+                        }
+                        case "Malaysia": {
+                            String[] expected = ReadFileUtility.readFile("malaysia-cameras");
+                            String[] actual = mapPage.getLiveMalaysiaCamerasList();
+                            if (expected.length == actual.length) {
+                                for (int i = 0; i < actual.length; i++) {
+                                    assertEquals(expected[i], actual[i]);
+                                }
+                            }
+                            else {
+                                Assert.fail("Count of expected cameras is " + expected.length + " but found " + actual.length);
+                            }
+                            break;
+                        }
+                        case "SriLanka": {
+                            String[] expected = ReadFileUtility.readFile("srilanka-cameras");
+                            String[] actual = mapPage.getLiveSriLankaCamerasList();
+                            if (expected.length == actual.length) {
+                                for (int i = 0; i < actual.length; i++) {
+                                    assertEquals(expected[i], actual[i]);
+                                }
+                            }
+                            else {
+                                Assert.fail("Count of expected cameras is " + expected.length + " but found " + actual.length);
+                            }
+                            break;
+                        }
+                        default: {
+                            throw new UnsupportedCommandException("Container \'" + containerName + "\' is not inside the scope");
+                        }
+                    }
+                    break;
+                }
+                case "Tolls": {
+                    switch (containerName) {
+                        case "Singapore": {
+                            String[] expected = ReadFileUtility.readFile("singapore-tolls");
+                            String[] actual = mapPage.getLiveSingaporeTollsList();
+                            if (expected.length == actual.length) {
+                                for (int i = 0; i < actual.length; i++) {
+                                    assertEquals(expected[i], actual[i]);
+                                }
+                            }
+                            else {
+                                Assert.fail("Count of expected cameras is " + expected.length + " but found " + actual.length);
+                            }
+                            break;
+                        }
+                        case "Malaysia": {
+                            String[] expected = ReadFileUtility.readFile("malaysia-tolls");
+                            String[] actual = mapPage.getLiveMalaysiaTollsList();
+                            if (expected.length == actual.length) {
+                                for (int i = 0; i < actual.length; i++) {
+                                    assertEquals(expected[i], actual[i]);
+                                }
+                            }
+                            else {
+                                Assert.fail("Count of expected cameras is " + expected.length + " but found " + actual.length);
+                            }
+                            break;
+                        }
+                        default: {
+                            throw new UnsupportedCommandException("Container \'" + containerName + "\' is not inside the scope");
+                        }
+                    }
+                    break;
+                }
+                default: {
+                    throw new UnsupportedCommandException("Sub-Section \'" + subSectionName + "\' is not inside the scope");
+                }
+            }
+
+        }
+        catch (NoSuchElementException e) {
+            Assert.fail(e.getMessage());
+        }
+        catch (FileNotFoundException e) {
+            Assert.fail(e.getMessage());
+        }
+    }
+
+    @And("^the Live Incidents (.*) Date Selector List should contain today and the last 3 days$")
     public void the_live_incidents_param_date_selector_list_should_contain_today_and_the_last_3_days(String containerName) {
         try {
             switch (containerName) {
@@ -334,7 +435,7 @@ public class LiveSectionSteps {
         }
     }
 
-    @And("^the Live Incidents (.*) should be ordered in a reverse chronological order")
+    @And("^the Live Incidents (.*) should be ordered in a reverse chronological order$")
     public void the_live_incidents_param_should_be_ordered_in_a_reverse_chronological_order(String containerName) {
         try {
             switch (containerName) {
@@ -359,16 +460,122 @@ public class LiveSectionSteps {
                         calendar.set(Calendar.SECOND, 0);
                         calendar.set(Calendar.MILLISECOND, 0);
                         Date oldStamp = calendar.getTime();
-                        System.out.println("--------");
-                        System.out.println("NEW: " + newStamp.getTime());
-                        System.out.println("OLD: " + oldStamp.getTime());
-                        System.out.println("--------");
                         assertTrue(newStamp.getTime() > oldStamp.getTime());
                     }
                     break;
                 }
                 default: {
                     throw new UnsupportedCommandException("Container \'" + containerName + "\' is not inside the scope");
+                }
+            }
+        }
+        catch (NoSuchElementException e) {
+            Assert.fail(e.getMessage());
+        }
+    }
+
+    @When("^he types \"(.*)\" in the Live (.*) (.*) Search Box$")
+    public void he_types_param_in_the_live_param_param_search_box(String searchText, String subSectionName, String containerName) {
+        try {
+            switch (subSectionName) {
+                case "Cameras": {
+                    switch (containerName) {
+                        case "Singapore": {
+                            mapPage.typeInLiveSingaporeCamerasSearch(searchText);
+                            break;
+                        }
+                        case "Malaysia": {
+                            mapPage.typeInLiveMalaysiaCamerasSearch(searchText);
+                            break;
+                        }
+                        case "SriLanka": {
+                            mapPage.typeInLiveSriLankaCamerasSearch(searchText);
+                            break;
+                        }
+                        default: {
+                            throw new UnsupportedCommandException("Container \'" + containerName + "\' is not inside the scope");
+                        }
+                    }
+                    break;
+                }
+                case "Tolls": {
+                    switch (containerName) {
+                        case "Singapore": {
+                            mapPage.typeInLiveSingaporeTollsSearch(searchText);
+                            break;
+                        }
+                        case "Malaysia": {
+                            mapPage.typeInLiveMalaysiaTollsSearch(searchText);
+                            break;
+                        }
+                        default: {
+                            throw new UnsupportedCommandException("Container \'" + containerName + "\' is not inside the scope");
+                        }
+                    }
+                    break;
+                }
+                default: {
+                    throw new UnsupportedCommandException("Sub-Section \'" + subSectionName + "\' is not inside the scope");
+                }
+            }
+        }
+        catch (NoSuchElementException e) {
+            Assert.fail(e.getMessage());
+        }
+    }
+
+    @Then("^the Live (.*) (.*) search result will contain \"(.*)\"")
+    public void the_live_param_param_search_result_will_contain_param(String subSectionName, String containerName, String searchResult) {
+        try {
+            switch (subSectionName) {
+                case "Cameras": {
+                    switch (containerName) {
+                        case "Singapore": {
+                            String[] result = mapPage.getLiveSingaporeCamerasList();
+                            assertEquals(1, result.length);
+                            assertEquals(searchResult, result[0]);
+                            break;
+                        }
+                        case "Malaysia": {
+                            String[] result = mapPage.getLiveMalaysiaCamerasList();
+                            assertEquals(1, result.length);
+                            assertEquals(searchResult, result[0]);
+                            break;
+                        }
+                        case "SriLanka": {
+                            String[] result = mapPage.getLiveSriLankaCamerasList();
+                            assertEquals(1, result.length);
+                            assertEquals(searchResult, result[0]);
+                            break;
+                        }
+                        default: {
+                            throw new UnsupportedCommandException("Container \'" + containerName + "\' is not inside the scope");
+                        }
+                    }
+                    break;
+                }
+                case "Tolls": {
+                    switch (containerName) {
+                        case "Singapore": {
+                            String[] result = mapPage.getLiveSingaporeTollsList();
+                            assertEquals(1, result.length);
+                            assertEquals(searchResult, result[0]);
+                            break;
+                        }
+                        case "Malaysia": {
+                            String[] result = mapPage.getLiveMalaysiaTollsList();
+                            assertEquals(1, result.length);
+                            assertEquals(searchResult, result[0]);
+                            break;
+                        }
+                        default: {
+                            throw new UnsupportedCommandException("Container \'" + containerName + "\' is not inside the scope");
+                        }
+                    }
+                    break;
+                }
+                default: {
+                    throw new UnsupportedCommandException("Sub-Section \'" + subSectionName + "\' is not inside the scope");
                 }
             }
         }
