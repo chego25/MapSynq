@@ -9,6 +9,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.safari.SafariDriver;
 import java.util.ArrayList;
@@ -76,8 +77,14 @@ public class DriverManager {
     }
 
     private InternetExplorerDriver getInternetExplorerDriver() throws UnsupportedCommandException {
-        String error = "Internet Explorer Browser is not supported";
-        throw new UnsupportedCommandException(error);
+        String driverPath = getExecutablePath() + "iedriver-" + getSystemArchitecture();
+        if (getOperatingSystem().equals("windows")) {
+            driverPath = driverPath + ".exe";
+        }
+        System.setProperty("webdriver.ie.driver", driverPath);
+        InternetExplorerOptions internetExplorerOptions = new InternetExplorerOptions();
+        internetExplorerOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+        return new InternetExplorerDriver(internetExplorerOptions);
     }
 
     private EdgeDriver getEdgeDriver() throws UnsupportedCommandException {
@@ -92,6 +99,9 @@ public class DriverManager {
 
     private String getExecutablePath() throws UnsupportedCommandException {
         String separator = System.getProperty("file.separator");
+        if (getOperatingSystem().equals("windows")) {
+            separator = separator + System.getProperty("file.separator");
+        }
         String suiteHome = System.getProperty("user.dir");
         ArrayList<String> pathParts = new ArrayList<String>(Arrays.asList(suiteHome.split(separator)));
         pathParts.add("drivers");
