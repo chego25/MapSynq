@@ -31,7 +31,9 @@ Irrespective of the operating system on which this suite will be run, the follow
 1. JDK 8 **(The environment path variable must be set)**
 2. Maven 3.5.4 **(The environment path variable must be set)**
 3. Git 2.14.1 **(The environment path variable must be set)**
+4. Allure Commandline Tool **(I used Node.js to install it)**
 4. Intellij Idea 2019.2 Community Edition
 ## Cloning, Execution and Reporting
 * To clone this repository, please type `git clone https://github.com/chego25/MapSynq.git` in the terminal or command prompt and press `enter` after navigating into the desired directory.
 * To execute the suite from command line, navigate into the suite directory in the terminal or command prompt, then type `mvn test -Dbrowser=<BROWSER>` and press `enter`. Valid values for the parameter `<BROWSER>` are `chrome`, `firefox`, `ie`, `edge` and `safari`. However, for Microsoft Edge and Apple Safari Browsers, the suite will throw an `org.openqa.selenium.UnsupportedCommandException` mentioning that, `Microsoft Edge Browser is not supported` or `Apple Safari Browser is not supported` respectively. That's why it has been mentioned that, the Cross-Browser feature has been partially implemented. If the `browser` parameter is not supplied in the command, the suite will also throw the same exception with message `Environment Variable 'browser' contains an invalid value: null`.
+* To view the generated test report after execution, please type `allure serve allure-results` and press `enter` in the terminal or command prompt. The report will be displayed in the system's default browser.
