@@ -40,6 +40,6 @@ Irrespective of the operating system on which this suite will be run, the follow
 * To execute the suite from command line, navigate into the suite directory in the terminal or command prompt, then type `mvn test -Dbrowser=<BROWSER>` and press `enter`. Valid values for the parameter `<BROWSER>` are `chrome`, `firefox`, `ie`, `edge` and `safari`. However, for Microsoft Edge and Apple Safari Browsers, the suite will throw an `org.openqa.selenium.UnsupportedCommandException` mentioning that, `Microsoft Edge Browser is not supported` or `Apple Safari Browser is not supported` respectively. That's why it has been mentioned that, the Cross-Browser feature has been partially implemented. If the `browser` parameter is not supplied in the command, the suite will also throw the same exception with message `Environment Variable 'browser' contains an invalid value: null`.
 * To view the generated test report after execution, please type `allure serve allure-results` and press `enter` in the terminal or command prompt. The report will be displayed in the system's default browser.
 ## Observations during Development
-1. Captcha was not in the Registration page. Hence, Registrationa and Login functionalities couldn't be scripted.
+1. Captcha was not in the Registration page. Hence, Registration and Login functionalities couldn't be scripted.
 2. The entire application has a performance issue. Sometimes, the server renders a bad gateway error as given below:
 ![Screenshot](https://raw.githubusercontent.com/chego25/MapSynq/master/assets/bad-request.png)
